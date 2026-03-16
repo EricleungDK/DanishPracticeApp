@@ -1,0 +1,232 @@
+[
+  {
+    "id": "rd-001",
+    "type": "reading",
+    "difficulty": "B1",
+    "topic": "daily routine",
+    "danish_text": "Mette står op klokken seks hver morgen. Hun tager et brusebad og spiser morgenmad med sin familie. Hendes mand, Lars, laver altid kaffe, mens børnene spiser havregryn med mælk. Klokken halv otte kører Mette børnene i skole, og bagefter tager hun bussen til arbejde. Hun arbejder som kontordame i en stor virksomhed i centrum af Odense. I frokostpausen går hun ofte en tur med sin kollega, Anne. De snakker om alt muligt, mens de nyder den friske luft. Efter arbejde henter Mette børnene, og de handler ind på vejen hjem. Om aftenen laver familien mad sammen. Det er deres yndlingstid på dagen. Børnene hjælper med at dække bord, og de spiser altid sammen klokken seks. Bagefter ser de lidt fjernsyn eller spiller brætspil, inden børnene går i seng klokken otte.",
+    "english_text": "Mette gets up at six o'clock every morning. She takes a shower and eats breakfast with her family. Her husband, Lars, always makes coffee while the children eat oatmeal with milk. At half past seven, Mette drives the children to school, and afterwards she takes the bus to work. She works as an office clerk in a large company in the center of Odense. During the lunch break, she often goes for a walk with her colleague, Anne. They talk about all sorts of things while they enjoy the fresh air. After work, Mette picks up the children, and they do grocery shopping on the way home. In the evening, the family cooks together. It is their favorite time of the day. The children help set the table, and they always eat together at six o'clock. Afterwards, they watch a bit of television or play board games before the children go to bed at eight.",
+    "answer_key": {
+      "questions": [
+        {
+          "question_da": "Hvad laver Lars om morgenen?",
+          "question_en": "What does Lars do in the morning?",
+          "type": "multiple_choice",
+          "options": ["Han laver morgenmad til børnene", "Han laver kaffe", "Han kører børnene i skole", "Han tager et brusebad"],
+          "correct_index": 1
+        },
+        {
+          "question_da": "Hvordan kommer Mette til arbejde?",
+          "question_en": "How does Mette get to work?",
+          "type": "multiple_choice",
+          "options": ["Hun kører i bil", "Hun cykler", "Hun tager bussen", "Hun går"],
+          "correct_index": 2
+        },
+        {
+          "question_da": "Hvad gør Mette i frokostpausen?",
+          "question_en": "What does Mette do during lunch break?",
+          "type": "free_text",
+          "correct": ["Hun går en tur med sin kollega Anne", "Hun går en tur med Anne", "går en tur"]
+        },
+        {
+          "question_da": "Hvad er familiens yndlingstid på dagen?",
+          "question_en": "What is the family's favorite time of the day?",
+          "type": "multiple_choice",
+          "options": ["Morgenmaden", "Frokostpausen", "Når de laver mad sammen om aftenen", "Sengetid"],
+          "correct_index": 2
+        },
+        {
+          "question_da": "Hvornår går børnene i seng?",
+          "question_en": "When do the children go to bed?",
+          "type": "free_text",
+          "correct": ["Klokken otte", "kl. 8", "klokken 8", "kl. otte"]
+        }
+      ]
+    },
+    "metadata": { "word_count": 155, "topic": "daily routine" }
+  },
+  {
+    "id": "rd-002",
+    "type": "reading",
+    "difficulty": "B1",
+    "topic": "traveling in Denmark",
+    "danish_text": "Danmark er et lille land, men der er meget at se og opleve. Mange turister besøger København for at se Den Lille Havfrue og Tivoli. Men der er også mange andre spændende steder i landet. Aarhus er Danmarks næststørste by og har et fantastisk kunstmuseum, der hedder ARoS. I Nordjylland kan man besøge Skagen, hvor Skagerrak og Kattegat mødes. Det er et populært sted for kunstnere, fordi lyset er helt specielt der. Hvis man kan lide natur, er Bornholm et godt valg. Øen ligger i Østersøen og er kendt for sine smukke klippekyster og røgerier, hvor man kan smage den berømte røgede sild. Man kan nemt rejse rundt i Danmark med tog. DSB, det danske jernbaneselskab, har forbindelser til alle de store byer. Det er også muligt at leje en bil eller tage færgen til de mange danske øer.",
+    "english_text": "Denmark is a small country, but there is a lot to see and experience. Many tourists visit Copenhagen to see The Little Mermaid and Tivoli. But there are also many other exciting places in the country. Aarhus is Denmark's second-largest city and has a fantastic art museum called ARoS. In North Jutland, you can visit Skagen, where the Skagerrak and the Kattegat meet. It is a popular place for artists because the light is very special there. If you like nature, Bornholm is a good choice. The island is located in the Baltic Sea and is known for its beautiful rocky coasts and smokehouses where you can taste the famous smoked herring. You can easily travel around Denmark by train. DSB, the Danish railway company, has connections to all the major cities. It is also possible to rent a car or take the ferry to the many Danish islands.",
+    "answer_key": {
+      "questions": [
+        {
+          "question_da": "Hvad hedder kunstmuseet i Aarhus?",
+          "question_en": "What is the name of the art museum in Aarhus?",
+          "type": "free_text",
+          "correct": ["ARoS", "Aros"]
+        },
+        {
+          "question_da": "Hvorfor er Skagen populært blandt kunstnere?",
+          "question_en": "Why is Skagen popular among artists?",
+          "type": "multiple_choice",
+          "options": ["Fordi der er billige boliger", "Fordi lyset er helt specielt", "Fordi der er mange gallerier", "Fordi der er god mad"],
+          "correct_index": 1
+        },
+        {
+          "question_da": "Hvor ligger Bornholm?",
+          "question_en": "Where is Bornholm located?",
+          "type": "multiple_choice",
+          "options": ["I Nordsøen", "I Skagerrak", "I Østersøen", "I Kattegat"],
+          "correct_index": 2
+        },
+        {
+          "question_da": "Hvad er Bornholm kendt for? Nævn to ting.",
+          "question_en": "What is Bornholm known for? Name two things.",
+          "type": "free_text",
+          "correct": ["Smukke klippekyster og røgerier", "klippekyster og røget sild", "klippekyster og røgerier"]
+        },
+        {
+          "question_da": "Hvad hedder det danske jernbaneselskab?",
+          "question_en": "What is the Danish railway company called?",
+          "type": "multiple_choice",
+          "options": ["SJ", "NS", "DSB", "DB"],
+          "correct_index": 2
+        }
+      ]
+    },
+    "metadata": { "word_count": 163, "topic": "traveling in Denmark" }
+  },
+  {
+    "id": "rd-003",
+    "type": "reading",
+    "difficulty": "B1",
+    "topic": "Danish food culture",
+    "danish_text": "Dansk madkultur har ændret sig meget i de sidste årtier. Traditionelt har danskerne spist mange kartofler, flæskesteg og rugbrød. Smørrebrød er nok den mest kendte danske ret i udlandet. Det er et stykke rugbrød med forskelligt pålæg, for eksempel sild, leverpostej eller roastbeef. I dag er det nye nordiske køkken blevet meget populært. Noma i København har flere gange været kåret som verdens bedste restaurant. Det nye nordiske køkken fokuserer på lokale og sæsonbestemte råvarer. Mange danskere spiser stadig frokost med rugbrød på arbejdet, men aftensmaden er blevet mere international. Det er helt normalt at lave pasta, sushi eller indisk mad hjemme. Danskerne er også glade for at gå ud og spise. Der findes mange forskellige restauranter i de større byer. Noget, der er typisk dansk, er fredagsslik. Hver fredag køber mange familier slik og snacks, som de nyder sammen foran fjernsynet.",
+    "english_text": "Danish food culture has changed a lot in recent decades. Traditionally, Danes have eaten a lot of potatoes, roast pork, and rye bread. Smørrebrød is probably the most well-known Danish dish abroad. It is a piece of rye bread with various toppings, for example herring, liver pate, or roast beef. Today, the New Nordic cuisine has become very popular. Noma in Copenhagen has been voted the world's best restaurant several times. The New Nordic cuisine focuses on local and seasonal ingredients. Many Danes still eat lunch with rye bread at work, but dinner has become more international. It is completely normal to make pasta, sushi, or Indian food at home. Danes also enjoy eating out. There are many different restaurants in the larger cities. Something that is typically Danish is Friday candy. Every Friday, many families buy candy and snacks, which they enjoy together in front of the television.",
+    "answer_key": {
+      "questions": [
+        {
+          "question_da": "Hvad er smørrebrød?",
+          "question_en": "What is smørrebrød?",
+          "type": "multiple_choice",
+          "options": ["En varm ret med kartofler", "Et stykke rugbrød med pålæg", "En slags suppe", "En kage"],
+          "correct_index": 1
+        },
+        {
+          "question_da": "Hvad fokuserer det nye nordiske køkken på?",
+          "question_en": "What does the New Nordic cuisine focus on?",
+          "type": "free_text",
+          "correct": ["Lokale og sæsonbestemte råvarer", "lokale råvarer", "sæsonbestemte råvarer"]
+        },
+        {
+          "question_da": "Hvilken restaurant i København er nævnt i teksten?",
+          "question_en": "Which restaurant in Copenhagen is mentioned in the text?",
+          "type": "free_text",
+          "correct": ["Noma"]
+        },
+        {
+          "question_da": "Hvad spiser mange danskere til frokost på arbejdet?",
+          "question_en": "What do many Danes eat for lunch at work?",
+          "type": "multiple_choice",
+          "options": ["Pasta", "Sushi", "Rugbrød", "Salat"],
+          "correct_index": 2
+        },
+        {
+          "question_da": "Hvad er fredagsslik?",
+          "question_en": "What is Friday candy?",
+          "type": "multiple_choice",
+          "options": ["En tradition hvor man spiser sund mad om fredagen", "En tradition hvor familier køber slik og snacks om fredagen", "En speciel dansk slikbutik", "En tradition med fredagskage"],
+          "correct_index": 1
+        }
+      ]
+    },
+    "metadata": { "word_count": 158, "topic": "Danish food culture" }
+  },
+  {
+    "id": "rd-004",
+    "type": "reading",
+    "difficulty": "B2",
+    "topic": "workplace",
+    "danish_text": "Den danske arbejdskultur adskiller sig på mange måder fra andre landes. Et af de mest bemærkelsesværdige træk er den flade hierarkiske struktur. I danske virksomheder er det normalt, at medarbejdere tiltaler deres chef ved fornavn, og alle forventes at bidrage med idéer uanset deres position. Begrebet 'work-life balance' tages meget alvorligt. De fleste danskere arbejder fra klokken otte til seksten og forlader kontoret til tiden. Overarbejde ses ikke nødvendigvis som et tegn på engagement, men snarere som dårlig tidsstyring. Fleksibilitet er også centralt. Mange virksomheder tilbyder hjemmearbejde og fleksible arbejdstider, især efter pandemien. Tillid spiller en afgørende rolle i det danske arbejdsliv. Ledere stoler på, at medarbejderne udfører deres opgaver selvstændigt, uden behov for konstant overvågning. Til gengæld forventes det, at man er ærlig om eventuelle problemer og tager ansvar for sit eget arbejde. Fagforeningerne har historisk set haft stor indflydelse på arbejdsmarkedet, og overenskomstforhandlinger er en vigtig del af det danske system. Denne model, der kaldes flexicurity, kombinerer fleksibilitet for arbejdsgiverne med sikkerhed for arbejdstagerne.",
+    "english_text": "Danish work culture differs in many ways from that of other countries. One of the most notable features is the flat hierarchical structure. In Danish companies, it is normal for employees to address their boss by first name, and everyone is expected to contribute ideas regardless of their position. The concept of 'work-life balance' is taken very seriously. Most Danes work from eight to four and leave the office on time. Overtime is not necessarily seen as a sign of commitment, but rather as poor time management. Flexibility is also central. Many companies offer remote work and flexible working hours, especially after the pandemic. Trust plays a crucial role in Danish working life. Managers trust that employees carry out their tasks independently, without the need for constant supervision. In return, it is expected that one is honest about any problems and takes responsibility for one's own work. Trade unions have historically had a great influence on the labor market, and collective bargaining is an important part of the Danish system. This model, called flexicurity, combines flexibility for employers with security for employees.",
+    "answer_key": {
+      "questions": [
+        {
+          "question_da": "Hvad er usædvanligt ved den hierarkiske struktur i danske virksomheder?",
+          "question_en": "What is unusual about the hierarchical structure in Danish companies?",
+          "type": "multiple_choice",
+          "options": ["Chefen bestemmer alt", "Strukturen er flad, og medarbejdere tiltaler chefen ved fornavn", "Der er mange ledelsesniveauer", "Kun chefer må komme med idéer"],
+          "correct_index": 1
+        },
+        {
+          "question_da": "Hvordan opfattes overarbejde i Danmark ifølge teksten?",
+          "question_en": "How is overtime perceived in Denmark according to the text?",
+          "type": "free_text",
+          "correct": ["Som dårlig tidsstyring", "Ikke som tegn på engagement men som dårlig tidsstyring", "dårlig tidsstyring"]
+        },
+        {
+          "question_da": "Hvad forventes der af medarbejderne til gengæld for tillid?",
+          "question_en": "What is expected of employees in return for trust?",
+          "type": "multiple_choice",
+          "options": ["At de arbejder over", "At de er ærlige om problemer og tager ansvar", "At de altid er på kontoret", "At de aldrig laver fejl"],
+          "correct_index": 1
+        },
+        {
+          "question_da": "Hvad er flexicurity?",
+          "question_en": "What is flexicurity?",
+          "type": "free_text",
+          "correct": ["En model der kombinerer fleksibilitet for arbejdsgiverne med sikkerhed for arbejdstagerne", "Kombination af fleksibilitet og sikkerhed", "fleksibilitet for arbejdsgivere og sikkerhed for arbejdstagere"]
+        },
+        {
+          "question_da": "Hvilken rolle har fagforeningerne spillet i Danmark?",
+          "question_en": "What role have trade unions played in Denmark?",
+          "type": "multiple_choice",
+          "options": ["Ingen betydning", "De har haft stor indflydelse på arbejdsmarkedet", "De har kun fokuseret på lønforhandlinger", "De er blevet afskaffet"],
+          "correct_index": 1
+        }
+      ]
+    },
+    "metadata": { "word_count": 185, "topic": "workplace" }
+  },
+  {
+    "id": "rd-005",
+    "type": "reading",
+    "difficulty": "B2",
+    "topic": "seasonal weather",
+    "danish_text": "Danmarks klima er tempereret og præget af landets beliggenhed mellem Nordsøen og Østersøen. Vejret kan skifte hurtigt, og det er ikke ualmindeligt at opleve flere årstider på én dag. Vinteren i Danmark er generelt mild sammenlignet med andre skandinaviske lande, men den kan føles bider kold på grund af den fugtighed og vind, der kommer fra havet. Temperaturen ligger typisk mellem nul og fem grader i vintermånederne, og solen går ned allerede omkring klokken halvfire i december. Denne mørke periode er grunden til, at danskerne har udviklet begrebet hygge, hvor man tænder stearinlys og nyder varme drikke indendørs. Foråret ankommer ofte sent, og det kan stadig fryse i april. Men når solen endelig bryder frem, forvandler landet sig. Kirsebærtræerne blomstrer, og folk strømmer ud i parkerne. Sommeren er kort men intens, med temperaturer mellem tyve og femogtyve grader og lyse aftener, der varer til klokken ti. Efteråret bringer smukke farver og høststorme, der fejer hen over det flade landskab. Mange danskere nyder at gå ture i skovene for at samle svampe og nyde de gyldne blade.",
+    "english_text": "Denmark's climate is temperate and influenced by the country's location between the North Sea and the Baltic Sea. The weather can change quickly, and it is not unusual to experience several seasons in one day. Winter in Denmark is generally mild compared to other Scandinavian countries, but it can feel bitterly cold due to the humidity and wind that comes from the sea. The temperature typically ranges between zero and five degrees during the winter months, and the sun sets as early as around half past three in December. This dark period is the reason why Danes have developed the concept of hygge, where one lights candles and enjoys warm drinks indoors. Spring often arrives late, and it can still freeze in April. But when the sun finally breaks through, the country transforms. Cherry trees blossom, and people stream out into the parks. Summer is short but intense, with temperatures between twenty and twenty-five degrees and bright evenings that last until ten o'clock. Autumn brings beautiful colors and harvest storms that sweep across the flat landscape. Many Danes enjoy walking in the forests to gather mushrooms and enjoy the golden leaves.",
+    "answer_key": {
+      "questions": [
+        {
+          "question_da": "Hvorfor kan vinteren føles koldere, end temperaturen antyder?",
+          "question_en": "Why can winter feel colder than the temperature suggests?",
+          "type": "multiple_choice",
+          "options": ["På grund af sne", "På grund af fugtighed og vind fra havet", "På grund af mørket", "På grund af mangel på opvarmning"],
+          "correct_index": 1
+        },
+        {
+          "question_da": "Hvad er forbindelsen mellem det mørke vejr og hygge?",
+          "question_en": "What is the connection between the dark weather and hygge?",
+          "type": "free_text",
+          "correct": ["Den mørke periode er grunden til at danskerne har udviklet hygge", "Danskerne har udviklet hygge på grund af den mørke vinter", "mørket fik danskerne til at udvikle hygge"]
+        },
+        {
+          "question_da": "Hvornår går solen ned i december?",
+          "question_en": "When does the sun set in December?",
+          "type": "multiple_choice",
+          "options": ["Klokken tre", "Klokken halvfire", "Klokken fire", "Klokken halvfem"],
+          "correct_index": 1
+        },
+        {
+          "question_da": "Beskriv den danske sommer ifølge teksten.",
+          "question_en": "Describe the Danish summer according to the text.",
+          "type": "free_text",
+          "correct": ["Kort men intens med temperaturer mellem tyve og femogtyve grader og lyse aftener", "kort men intens", "kort og intens med lyse aftener"]
+        },
+        {
+          "question_da": "Hvad nyder mange danskere at gøre om efteråret?",
+          "question_en": "What do many Danes enjoy doing in autumn?",
+          "type": "multiple_choice",
+          "options": ["Svømme i havet", "Gå ture i skovene og samle svampe", "Rejse til udlandet", "Dyrke sport udendørs"],
+          "correct_index": 1
+        }
+      ]
+    },
+    "metadata": { "word_count": 192, "topic": "seasonal weather" }
+  }
+]

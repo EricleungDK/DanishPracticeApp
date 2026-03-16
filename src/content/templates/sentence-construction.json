@@ -1,0 +1,422 @@
+[
+  {
+    "id": "sc-001",
+    "type": "sentence_construction",
+    "difficulty": "B1",
+    "topic": "daily life",
+    "danish_text": "Jeg spiser morgenmad klokken syv hver dag.",
+    "english_text": "I eat breakfast at seven o'clock every day.",
+    "answer_key": {
+      "correct_order": ["Jeg", "spiser", "morgenmad", "klokken", "syv", "hver", "dag."],
+      "words_given": ["dag.", "Jeg", "klokken", "syv", "morgenmad", "spiser", "hver"],
+      "accept_also": ["Hver dag spiser jeg morgenmad klokken syv."]
+    },
+    "metadata": { "grammar_point": "basic SVO word order", "focus_word": "spiser" }
+  },
+  {
+    "id": "sc-002",
+    "type": "sentence_construction",
+    "difficulty": "B1",
+    "topic": "travel",
+    "danish_text": "I morgen skal vi flyve til København.",
+    "english_text": "Tomorrow we are going to fly to Copenhagen.",
+    "answer_key": {
+      "correct_order": ["I", "morgen", "skal", "vi", "flyve", "til", "København."],
+      "words_given": ["flyve", "vi", "København.", "I", "til", "morgen", "skal"],
+      "accept_also": ["Vi skal flyve til København i morgen."]
+    },
+    "metadata": { "grammar_point": "V2 rule with time adverbial fronting", "focus_word": "skal" }
+  },
+  {
+    "id": "sc-003",
+    "type": "sentence_construction",
+    "difficulty": "B1",
+    "topic": "food",
+    "danish_text": "Hun laver altid god mad til aftensmad.",
+    "english_text": "She always makes good food for dinner.",
+    "answer_key": {
+      "correct_order": ["Hun", "laver", "altid", "god", "mad", "til", "aftensmad."],
+      "words_given": ["altid", "aftensmad.", "Hun", "god", "til", "laver", "mad"],
+      "accept_also": []
+    },
+    "metadata": { "grammar_point": "adverb placement after verb in main clause", "focus_word": "altid" }
+  },
+  {
+    "id": "sc-004",
+    "type": "sentence_construction",
+    "difficulty": "B1",
+    "topic": "weather",
+    "danish_text": "Det regner meget i Danmark om efteråret.",
+    "english_text": "It rains a lot in Denmark in the autumn.",
+    "answer_key": {
+      "correct_order": ["Det", "regner", "meget", "i", "Danmark", "om", "efteråret."],
+      "words_given": ["om", "Det", "Danmark", "efteråret.", "meget", "i", "regner"],
+      "accept_also": ["Om efteråret regner det meget i Danmark."]
+    },
+    "metadata": { "grammar_point": "basic word order with prepositional phrases", "focus_word": "regner" }
+  },
+  {
+    "id": "sc-005",
+    "type": "sentence_construction",
+    "difficulty": "B1",
+    "topic": "work",
+    "danish_text": "Min kollega kan tale tre sprog flydende.",
+    "english_text": "My colleague can speak three languages fluently.",
+    "answer_key": {
+      "correct_order": ["Min", "kollega", "kan", "tale", "tre", "sprog", "flydende."],
+      "words_given": ["tre", "flydende.", "kollega", "Min", "tale", "sprog", "kan"],
+      "accept_also": []
+    },
+    "metadata": { "grammar_point": "modal verb + infinitive", "focus_word": "kan" }
+  },
+  {
+    "id": "sc-006",
+    "type": "sentence_construction",
+    "difficulty": "B1",
+    "topic": "shopping",
+    "danish_text": "De nye bukser passer mig rigtig godt.",
+    "english_text": "The new trousers fit me really well.",
+    "answer_key": {
+      "correct_order": ["De", "nye", "bukser", "passer", "mig", "rigtig", "godt."],
+      "words_given": ["godt.", "bukser", "nye", "mig", "De", "rigtig", "passer"],
+      "accept_also": []
+    },
+    "metadata": { "grammar_point": "definite adjective form with plural noun", "focus_word": "nye" }
+  },
+  {
+    "id": "sc-007",
+    "type": "sentence_construction",
+    "difficulty": "B1",
+    "topic": "family",
+    "danish_text": "Mine børn leger ofte i haven efter skole.",
+    "english_text": "My children often play in the garden after school.",
+    "answer_key": {
+      "correct_order": ["Mine", "børn", "leger", "ofte", "i", "haven", "efter", "skole."],
+      "words_given": ["efter", "ofte", "Mine", "haven", "skole.", "i", "leger", "børn"],
+      "accept_also": ["Ofte leger mine børn i haven efter skole."]
+    },
+    "metadata": { "grammar_point": "adverb placement with 'ofte'", "focus_word": "ofte" }
+  },
+  {
+    "id": "sc-008",
+    "type": "sentence_construction",
+    "difficulty": "B1",
+    "topic": "health",
+    "danish_text": "Man bør drikke mindst to liter vand om dagen.",
+    "english_text": "One should drink at least two liters of water per day.",
+    "answer_key": {
+      "correct_order": ["Man", "bør", "drikke", "mindst", "to", "liter", "vand", "om", "dagen."],
+      "words_given": ["om", "Man", "vand", "mindst", "drikke", "to", "dagen.", "liter", "bør"],
+      "accept_also": []
+    },
+    "metadata": { "grammar_point": "modal verb 'bør' + infinitive", "focus_word": "bør" }
+  },
+  {
+    "id": "sc-009",
+    "type": "sentence_construction",
+    "difficulty": "B1",
+    "topic": "socializing",
+    "danish_text": "Vi holder en fest på lørdag aften.",
+    "english_text": "We are having a party on Saturday evening.",
+    "answer_key": {
+      "correct_order": ["Vi", "holder", "en", "fest", "på", "lørdag", "aften."],
+      "words_given": ["aften.", "en", "holder", "lørdag", "Vi", "fest", "på"],
+      "accept_also": ["På lørdag aften holder vi en fest."]
+    },
+    "metadata": { "grammar_point": "basic SVO with prepositional time phrase", "focus_word": "holder" }
+  },
+  {
+    "id": "sc-010",
+    "type": "sentence_construction",
+    "difficulty": "B1",
+    "topic": "culture",
+    "danish_text": "Danskerne fejrer jul den fireogtyvende december.",
+    "english_text": "The Danes celebrate Christmas on the twenty-fourth of December.",
+    "answer_key": {
+      "correct_order": ["Danskerne", "fejrer", "jul", "den", "fireogtyvende", "december."],
+      "words_given": ["den", "jul", "december.", "Danskerne", "fireogtyvende", "fejrer"],
+      "accept_also": ["Den fireogtyvende december fejrer danskerne jul."]
+    },
+    "metadata": { "grammar_point": "V2 rule and date expressions", "focus_word": "fejrer" }
+  },
+  {
+    "id": "sc-011",
+    "type": "sentence_construction",
+    "difficulty": "B1",
+    "topic": "daily life",
+    "danish_text": "Jeg har aldrig prøvet at stå op så tidligt.",
+    "english_text": "I have never tried getting up so early.",
+    "answer_key": {
+      "correct_order": ["Jeg", "har", "aldrig", "prøvet", "at", "stå", "op", "så", "tidligt."],
+      "words_given": ["op", "så", "aldrig", "Jeg", "at", "tidligt.", "har", "stå", "prøvet"],
+      "accept_also": []
+    },
+    "metadata": { "grammar_point": "adverb placement with perfect tense", "focus_word": "aldrig" }
+  },
+  {
+    "id": "sc-012",
+    "type": "sentence_construction",
+    "difficulty": "B1",
+    "topic": "travel",
+    "danish_text": "Bussen kører hvert kvarter fra stationen.",
+    "english_text": "The bus runs every quarter hour from the station.",
+    "answer_key": {
+      "correct_order": ["Bussen", "kører", "hvert", "kvarter", "fra", "stationen."],
+      "words_given": ["fra", "kvarter", "Bussen", "stationen.", "hvert", "kører"],
+      "accept_also": ["Fra stationen kører bussen hvert kvarter."]
+    },
+    "metadata": { "grammar_point": "basic word order with frequency expression", "focus_word": "hvert" }
+  },
+  {
+    "id": "sc-013",
+    "type": "sentence_construction",
+    "difficulty": "B1",
+    "topic": "food",
+    "danish_text": "Der er et hyggeligt bageri på hjørnet.",
+    "english_text": "There is a cozy bakery on the corner.",
+    "answer_key": {
+      "correct_order": ["Der", "er", "et", "hyggeligt", "bageri", "på", "hjørnet."],
+      "words_given": ["hyggeligt", "hjørnet.", "et", "Der", "bageri", "på", "er"],
+      "accept_also": ["På hjørnet er der et hyggeligt bageri."]
+    },
+    "metadata": { "grammar_point": "existential 'der er' construction", "focus_word": "der" }
+  },
+  {
+    "id": "sc-014",
+    "type": "sentence_construction",
+    "difficulty": "B1",
+    "topic": "health",
+    "danish_text": "Jeg skulle gerne bestille en tid hos lægen.",
+    "english_text": "I would like to book an appointment with the doctor.",
+    "answer_key": {
+      "correct_order": ["Jeg", "skulle", "gerne", "bestille", "en", "tid", "hos", "lægen."],
+      "words_given": ["gerne", "en", "lægen.", "bestille", "Jeg", "tid", "hos", "skulle"],
+      "accept_also": []
+    },
+    "metadata": { "grammar_point": "polite request with 'skulle gerne'", "focus_word": "gerne" }
+  },
+  {
+    "id": "sc-015",
+    "type": "sentence_construction",
+    "difficulty": "B1",
+    "topic": "family",
+    "danish_text": "Vores bedsteforældre bor i et lille hus på landet.",
+    "english_text": "Our grandparents live in a small house in the countryside.",
+    "answer_key": {
+      "correct_order": ["Vores", "bedsteforældre", "bor", "i", "et", "lille", "hus", "på", "landet."],
+      "words_given": ["på", "landet.", "bor", "et", "Vores", "lille", "i", "hus", "bedsteforældre"],
+      "accept_also": []
+    },
+    "metadata": { "grammar_point": "neuter article + adjective before noun", "focus_word": "lille" }
+  },
+  {
+    "id": "sc-016",
+    "type": "sentence_construction",
+    "difficulty": "B2",
+    "topic": "work",
+    "danish_text": "Fordi han ikke havde forberedt sig, klarede han sig dårligt til mødet.",
+    "english_text": "Because he had not prepared himself, he did poorly at the meeting.",
+    "answer_key": {
+      "correct_order": ["Fordi", "han", "ikke", "havde", "forberedt", "sig,", "klarede", "han", "sig", "dårligt", "til", "mødet."],
+      "words_given": ["sig,", "til", "ikke", "klarede", "Fordi", "han", "mødet.", "dårligt", "havde", "han", "sig", "forberedt"],
+      "accept_also": []
+    },
+    "metadata": { "grammar_point": "subordinate clause word order (negation before verb)", "focus_word": "ikke" }
+  },
+  {
+    "id": "sc-017",
+    "type": "sentence_construction",
+    "difficulty": "B2",
+    "topic": "culture",
+    "danish_text": "Museet, som ligger i centrum, er åbent hele ugen.",
+    "english_text": "The museum, which is located in the center, is open all week.",
+    "answer_key": {
+      "correct_order": ["Museet,", "som", "ligger", "i", "centrum,", "er", "åbent", "hele", "ugen."],
+      "words_given": ["hele", "åbent", "som", "Museet,", "ugen.", "ligger", "er", "i", "centrum,"],
+      "accept_also": ["Museet, der ligger i centrum, er åbent hele ugen."]
+    },
+    "metadata": { "grammar_point": "relative clause with 'som/der'", "focus_word": "som" }
+  },
+  {
+    "id": "sc-018",
+    "type": "sentence_construction",
+    "difficulty": "B2",
+    "topic": "daily life",
+    "danish_text": "Selvom jeg var træt, blev jeg oppe til sent.",
+    "english_text": "Although I was tired, I stayed up until late.",
+    "answer_key": {
+      "correct_order": ["Selvom", "jeg", "var", "træt,", "blev", "jeg", "oppe", "til", "sent."],
+      "words_given": ["oppe", "var", "jeg", "til", "Selvom", "sent.", "træt,", "blev", "jeg"],
+      "accept_also": []
+    },
+    "metadata": { "grammar_point": "concessive clause + V2 in main clause", "focus_word": "selvom" }
+  },
+  {
+    "id": "sc-019",
+    "type": "sentence_construction",
+    "difficulty": "B2",
+    "topic": "travel",
+    "danish_text": "Havde vi booket tidligere, ville vi have fået billigere billetter.",
+    "english_text": "Had we booked earlier, we would have gotten cheaper tickets.",
+    "answer_key": {
+      "correct_order": ["Havde", "vi", "booket", "tidligere,", "ville", "vi", "have", "fået", "billigere", "billetter."],
+      "words_given": ["fået", "vi", "Havde", "billetter.", "tidligere,", "billigere", "booket", "have", "ville", "vi"],
+      "accept_also": ["Hvis vi havde booket tidligere, ville vi have fået billigere billetter."]
+    },
+    "metadata": { "grammar_point": "inverted conditional (no 'hvis')", "focus_word": "havde" }
+  },
+  {
+    "id": "sc-020",
+    "type": "sentence_construction",
+    "difficulty": "B2",
+    "topic": "food",
+    "danish_text": "Retten, der serveres kold, er lavet af friske råvarer.",
+    "english_text": "The dish, which is served cold, is made from fresh ingredients.",
+    "answer_key": {
+      "correct_order": ["Retten,", "der", "serveres", "kold,", "er", "lavet", "af", "friske", "råvarer."],
+      "words_given": ["kold,", "af", "lavet", "friske", "Retten,", "der", "råvarer.", "er", "serveres"],
+      "accept_also": []
+    },
+    "metadata": { "grammar_point": "s-passive in relative clause", "focus_word": "serveres" }
+  },
+  {
+    "id": "sc-021",
+    "type": "sentence_construction",
+    "difficulty": "B2",
+    "topic": "weather",
+    "danish_text": "Det forventes, at temperaturen ikke vil stige i morgen.",
+    "english_text": "It is expected that the temperature will not rise tomorrow.",
+    "answer_key": {
+      "correct_order": ["Det", "forventes,", "at", "temperaturen", "ikke", "vil", "stige", "i", "morgen."],
+      "words_given": ["i", "ikke", "forventes,", "Det", "morgen.", "stige", "at", "vil", "temperaturen"],
+      "accept_also": []
+    },
+    "metadata": { "grammar_point": "negation in subordinate clause (before modal verb)", "focus_word": "ikke" }
+  },
+  {
+    "id": "sc-022",
+    "type": "sentence_construction",
+    "difficulty": "B2",
+    "topic": "socializing",
+    "danish_text": "Jo mere vi snakker sammen, desto bedre lærer vi hinanden at kende.",
+    "english_text": "The more we talk together, the better we get to know each other.",
+    "answer_key": {
+      "correct_order": ["Jo", "mere", "vi", "snakker", "sammen,", "desto", "bedre", "lærer", "vi", "hinanden", "at", "kende."],
+      "words_given": ["bedre", "vi", "Jo", "kende.", "desto", "mere", "hinanden", "snakker", "sammen,", "at", "vi", "lærer"],
+      "accept_also": []
+    },
+    "metadata": { "grammar_point": "correlative 'jo...desto' construction", "focus_word": "desto" }
+  },
+  {
+    "id": "sc-023",
+    "type": "sentence_construction",
+    "difficulty": "B2",
+    "topic": "health",
+    "danish_text": "Patienten, hvis tilstand var blevet forværret, blev indlagt på hospitalet.",
+    "english_text": "The patient, whose condition had worsened, was admitted to the hospital.",
+    "answer_key": {
+      "correct_order": ["Patienten,", "hvis", "tilstand", "var", "blevet", "forværret,", "blev", "indlagt", "på", "hospitalet."],
+      "words_given": ["forværret,", "hvis", "blev", "hospitalet.", "Patienten,", "indlagt", "tilstand", "var", "på", "blevet"],
+      "accept_also": []
+    },
+    "metadata": { "grammar_point": "possessive relative pronoun 'hvis' + passive", "focus_word": "hvis" }
+  },
+  {
+    "id": "sc-024",
+    "type": "sentence_construction",
+    "difficulty": "B2",
+    "topic": "shopping",
+    "danish_text": "Varen kan hverken byttes eller refunderes efter tredive dage.",
+    "english_text": "The item can neither be exchanged nor refunded after thirty days.",
+    "answer_key": {
+      "correct_order": ["Varen", "kan", "hverken", "byttes", "eller", "refunderes", "efter", "tredive", "dage."],
+      "words_given": ["eller", "kan", "dage.", "refunderes", "Varen", "tredive", "hverken", "efter", "byttes"],
+      "accept_also": []
+    },
+    "metadata": { "grammar_point": "double negation with 'hverken...eller'", "focus_word": "hverken" }
+  },
+  {
+    "id": "sc-025",
+    "type": "sentence_construction",
+    "difficulty": "B2",
+    "topic": "family",
+    "danish_text": "Børnene, som aldrig havde set havet før, var meget begejstrede.",
+    "english_text": "The children, who had never seen the sea before, were very excited.",
+    "answer_key": {
+      "correct_order": ["Børnene,", "som", "aldrig", "havde", "set", "havet", "før,", "var", "meget", "begejstrede."],
+      "words_given": ["set", "var", "aldrig", "før,", "Børnene,", "meget", "havet", "som", "begejstrede.", "havde"],
+      "accept_also": ["Børnene, der aldrig havde set havet før, var meget begejstrede."]
+    },
+    "metadata": { "grammar_point": "adverb placement in subordinate clause (before verb)", "focus_word": "aldrig" }
+  },
+  {
+    "id": "sc-026",
+    "type": "sentence_construction",
+    "difficulty": "B2",
+    "topic": "work",
+    "danish_text": "Projektet blev afsluttet, inden fristen udløb.",
+    "english_text": "The project was completed before the deadline expired.",
+    "answer_key": {
+      "correct_order": ["Projektet", "blev", "afsluttet,", "inden", "fristen", "udløb."],
+      "words_given": ["fristen", "afsluttet,", "Projektet", "udløb.", "blev", "inden"],
+      "accept_also": ["Inden fristen udløb, blev projektet afsluttet."]
+    },
+    "metadata": { "grammar_point": "temporal subordinate clause with 'inden'", "focus_word": "inden" }
+  },
+  {
+    "id": "sc-027",
+    "type": "sentence_construction",
+    "difficulty": "B2",
+    "topic": "culture",
+    "danish_text": "Ikke alene er Danmark et smukt land, men det er også meget trygt.",
+    "english_text": "Not only is Denmark a beautiful country, but it is also very safe.",
+    "answer_key": {
+      "correct_order": ["Ikke", "alene", "er", "Danmark", "et", "smukt", "land,", "men", "det", "er", "også", "meget", "trygt."],
+      "words_given": ["smukt", "er", "Danmark", "trygt.", "men", "det", "også", "alene", "Ikke", "land,", "et", "er", "meget"],
+      "accept_also": []
+    },
+    "metadata": { "grammar_point": "inversion with 'ikke alene...men også'", "focus_word": "alene" }
+  },
+  {
+    "id": "sc-028",
+    "type": "sentence_construction",
+    "difficulty": "B2",
+    "topic": "daily life",
+    "danish_text": "Det var først, da hun ringede, at jeg huskede aftalen.",
+    "english_text": "It was only when she called that I remembered the appointment.",
+    "answer_key": {
+      "correct_order": ["Det", "var", "først,", "da", "hun", "ringede,", "at", "jeg", "huskede", "aftalen."],
+      "words_given": ["huskede", "da", "ringede,", "først,", "Det", "jeg", "at", "aftalen.", "var", "hun"],
+      "accept_also": []
+    },
+    "metadata": { "grammar_point": "cleft sentence construction", "focus_word": "først" }
+  },
+  {
+    "id": "sc-029",
+    "type": "sentence_construction",
+    "difficulty": "B2",
+    "topic": "travel",
+    "danish_text": "Uanset hvad vejret bliver, tager vi af sted som planlagt.",
+    "english_text": "Regardless of what the weather will be, we are leaving as planned.",
+    "answer_key": {
+      "correct_order": ["Uanset", "hvad", "vejret", "bliver,", "tager", "vi", "af", "sted", "som", "planlagt."],
+      "words_given": ["af", "planlagt.", "vi", "Uanset", "vejret", "tager", "hvad", "sted", "som", "bliver,"],
+      "accept_also": []
+    },
+    "metadata": { "grammar_point": "concessive clause with 'uanset'", "focus_word": "uanset" }
+  },
+  {
+    "id": "sc-030",
+    "type": "sentence_construction",
+    "difficulty": "B2",
+    "topic": "socializing",
+    "danish_text": "Hverken han eller hans kone kunne komme til middagen.",
+    "english_text": "Neither he nor his wife could come to the dinner.",
+    "answer_key": {
+      "correct_order": ["Hverken", "han", "eller", "hans", "kone", "kunne", "komme", "til", "middagen."],
+      "words_given": ["hans", "til", "eller", "kone", "Hverken", "middagen.", "komme", "han", "kunne"],
+      "accept_also": []
+    },
+    "metadata": { "grammar_point": "correlative conjunction 'hverken...eller'", "focus_word": "hverken" }
+  }
+]

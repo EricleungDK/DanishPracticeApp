@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(systematic-debugging)",
+      "Skill(documentation-consolidator)",
+      "SlashCommand(/update_doc)",
+      "Bash(cat:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm test:*)",
+      "Bash(npm run:*)",
+      "Bash(npx electron:*)",
+      "Bash(npx jest:*)",
+      "Bash(npx playwright:*)",
+      "Bash(node -e:*)",
+      "Bash(mkdir:*)",
+      "Bash(sqlite3:*)",
+      "Bash(cd:*)"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "enableAllProjectMcpServers": false,
+  "enabledMcpjsonServers": []
+}

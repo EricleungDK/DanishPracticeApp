@@ -1,0 +1,212 @@
+[
+  {
+    "id": "ls-001",
+    "type": "listening",
+    "difficulty": "B1",
+    "topic": "daily life",
+    "danish_text": "Jeg plejer at stå op klokken syv om morgenen.",
+    "english_text": "I usually get up at seven in the morning.",
+    "answer_key": {
+      "mode": "transcribe",
+      "correct": ["Jeg plejer at stå op klokken syv om morgenen."],
+      "accept_also": ["Jeg plejer at stå op klokken 7 om morgenen."]
+    },
+    "metadata": { "tts_speed": "normal", "repeat_allowed": true, "focus": "comprehension", "tts_required": true }
+  },
+  {
+    "id": "ls-002",
+    "type": "listening",
+    "difficulty": "B1",
+    "topic": "shopping",
+    "danish_text": "Undskyld, hvor finder jeg mælk og brød?",
+    "english_text": "Excuse me, where do I find milk and bread?",
+    "answer_key": {
+      "mode": "transcribe",
+      "correct": ["Undskyld, hvor finder jeg mælk og brød?"],
+      "accept_also": ["Undskyld hvor finder jeg mælk og brød"]
+    },
+    "metadata": { "tts_speed": "normal", "repeat_allowed": true, "focus": "comprehension", "tts_required": true }
+  },
+  {
+    "id": "ls-003",
+    "type": "listening",
+    "difficulty": "B1",
+    "topic": "weather",
+    "danish_text": "Det bliver regnvejr i morgen, så tag en paraply med.",
+    "english_text": "It will be rainy tomorrow, so bring an umbrella.",
+    "answer_key": {
+      "mode": "transcribe",
+      "correct": ["Det bliver regnvejr i morgen, så tag en paraply med."],
+      "accept_also": ["Det bliver regnvejr imorgen så tag en paraply med."]
+    },
+    "metadata": { "tts_speed": "normal", "repeat_allowed": true, "focus": "comprehension", "tts_required": true }
+  },
+  {
+    "id": "ls-004",
+    "type": "listening",
+    "difficulty": "B1",
+    "topic": "travel",
+    "danish_text": "Toget til Aarhus afgår fra spor tre om ti minutter.",
+    "english_text": "The train to Aarhus departs from track three in ten minutes.",
+    "answer_key": {
+      "mode": "transcribe",
+      "correct": ["Toget til Aarhus afgår fra spor tre om ti minutter."],
+      "accept_also": ["Toget til Aarhus afgår fra spor 3 om 10 minutter."]
+    },
+    "metadata": { "tts_speed": "normal", "repeat_allowed": true, "focus": "comprehension", "tts_required": true }
+  },
+  {
+    "id": "ls-005",
+    "type": "listening",
+    "difficulty": "B1",
+    "topic": "food",
+    "danish_text": "Vi skal have stegt flæsk med persillesovs til aftensmad.",
+    "english_text": "We are having fried pork belly with parsley sauce for dinner.",
+    "answer_key": {
+      "mode": "transcribe",
+      "correct": ["Vi skal have stegt flæsk med persillesovs til aftensmad."],
+      "accept_also": ["Vi skal have stegt flæsk med persille sovs til aftensmad."]
+    },
+    "metadata": { "tts_speed": "normal", "repeat_allowed": true, "focus": "comprehension", "tts_required": true }
+  },
+  {
+    "id": "ls-006",
+    "type": "listening",
+    "difficulty": "B1",
+    "topic": "family",
+    "danish_text": "Min søster og hendes mand venter deres første barn.",
+    "english_text": "My sister and her husband are expecting their first child.",
+    "answer_key": {
+      "mode": "transcribe",
+      "correct": ["Min søster og hendes mand venter deres første barn."],
+      "accept_also": ["Min søster og hendes mand venter deres 1. barn."]
+    },
+    "metadata": { "tts_speed": "normal", "repeat_allowed": true, "focus": "comprehension", "tts_required": true }
+  },
+  {
+    "id": "ls-007",
+    "type": "listening",
+    "difficulty": "B1",
+    "topic": "health",
+    "danish_text": "Jeg har brug for at bestille en tid hos tandlægen.",
+    "english_text": "I need to book an appointment with the dentist.",
+    "answer_key": {
+      "mode": "transcribe",
+      "correct": ["Jeg har brug for at bestille en tid hos tandlægen."],
+      "accept_also": ["Jeg har brug for at bestille en tid hos tandlaegen."]
+    },
+    "metadata": { "tts_speed": "normal", "repeat_allowed": true, "focus": "comprehension", "tts_required": true }
+  },
+  {
+    "id": "ls-008",
+    "type": "listening",
+    "difficulty": "B1",
+    "topic": "socializing",
+    "danish_text": "Har du lyst til at tage med i biografen på fredag?",
+    "english_text": "Would you like to come to the cinema on Friday?",
+    "answer_key": {
+      "mode": "transcribe",
+      "correct": ["Har du lyst til at tage med i biografen på fredag?"],
+      "accept_also": ["Har du lyst til at tage med i biografen paa fredag?"]
+    },
+    "metadata": { "tts_speed": "normal", "repeat_allowed": true, "focus": "comprehension", "tts_required": true }
+  },
+  {
+    "id": "ls-009",
+    "type": "listening",
+    "difficulty": "B2",
+    "topic": "work",
+    "danish_text": "Mødet er blevet udskudt til næste uge på grund af sygdom.",
+    "english_text": "The meeting has been postponed to next week due to illness.",
+    "answer_key": {
+      "mode": "transcribe",
+      "correct": ["Mødet er blevet udskudt til næste uge på grund af sygdom."],
+      "accept_also": ["Mødet er blevet udskudt til næste uge pga. sygdom."]
+    },
+    "metadata": { "tts_speed": "normal", "repeat_allowed": true, "focus": "comprehension", "tts_required": true }
+  },
+  {
+    "id": "ls-010",
+    "type": "listening",
+    "difficulty": "B2",
+    "topic": "culture",
+    "danish_text": "Udstillingen på Louisiana Museum handler om moderne dansk arkitektur.",
+    "english_text": "The exhibition at Louisiana Museum is about modern Danish architecture.",
+    "answer_key": {
+      "mode": "transcribe",
+      "correct": ["Udstillingen på Louisiana Museum handler om moderne dansk arkitektur."],
+      "accept_also": ["Udstillingen på Louisiana museum handler om moderne dansk arkitektur."]
+    },
+    "metadata": { "tts_speed": "normal", "repeat_allowed": true, "focus": "comprehension", "tts_required": true }
+  },
+  {
+    "id": "ls-011",
+    "type": "listening",
+    "difficulty": "B2",
+    "topic": "daily life",
+    "danish_text": "Selvom jeg havde sat tre alarmer, nåede jeg ikke bussen i morges.",
+    "english_text": "Although I had set three alarms, I didn't catch the bus this morning.",
+    "answer_key": {
+      "mode": "transcribe",
+      "correct": ["Selvom jeg havde sat tre alarmer, nåede jeg ikke bussen i morges."],
+      "accept_also": ["Selvom jeg havde sat 3 alarmer, nåede jeg ikke bussen i morges."]
+    },
+    "metadata": { "tts_speed": "normal", "repeat_allowed": true, "focus": "comprehension", "tts_required": true }
+  },
+  {
+    "id": "ls-012",
+    "type": "listening",
+    "difficulty": "B2",
+    "topic": "travel",
+    "danish_text": "Færgen til Bornholm sejler fra Ystad og tager cirka halvanden time.",
+    "english_text": "The ferry to Bornholm sails from Ystad and takes about one and a half hours.",
+    "answer_key": {
+      "mode": "transcribe",
+      "correct": ["Færgen til Bornholm sejler fra Ystad og tager cirka halvanden time."],
+      "accept_also": ["Færgen til Bornholm sejler fra Ystad og tager ca. halvanden time."]
+    },
+    "metadata": { "tts_speed": "normal", "repeat_allowed": true, "focus": "comprehension", "tts_required": true }
+  },
+  {
+    "id": "ls-013",
+    "type": "listening",
+    "difficulty": "B2",
+    "topic": "food",
+    "danish_text": "Den nye restaurant i Nyhavn har fået fremragende anmeldelser af kritikerne.",
+    "english_text": "The new restaurant in Nyhavn has received excellent reviews from the critics.",
+    "answer_key": {
+      "mode": "transcribe",
+      "correct": ["Den nye restaurant i Nyhavn har fået fremragende anmeldelser af kritikerne."],
+      "accept_also": ["Den nye restaurant i Nyhavn har faaet fremragende anmeldelser af kritikerne."]
+    },
+    "metadata": { "tts_speed": "normal", "repeat_allowed": true, "focus": "comprehension", "tts_required": true }
+  },
+  {
+    "id": "ls-014",
+    "type": "listening",
+    "difficulty": "B2",
+    "topic": "health",
+    "danish_text": "Lægen anbefalede, at jeg skulle tage det med ro i mindst to uger.",
+    "english_text": "The doctor recommended that I should take it easy for at least two weeks.",
+    "answer_key": {
+      "mode": "transcribe",
+      "correct": ["Lægen anbefalede, at jeg skulle tage det med ro i mindst to uger."],
+      "accept_also": ["Lægen anbefalede at jeg skulle tage det med ro i mindst 2 uger."]
+    },
+    "metadata": { "tts_speed": "normal", "repeat_allowed": true, "focus": "comprehension", "tts_required": true }
+  },
+  {
+    "id": "ls-015",
+    "type": "listening",
+    "difficulty": "B2",
+    "topic": "socializing",
+    "danish_text": "Havde du ikke fortalt mig det, ville jeg aldrig have fundet ud af det.",
+    "english_text": "If you hadn't told me, I would never have found out.",
+    "answer_key": {
+      "mode": "transcribe",
+      "correct": ["Havde du ikke fortalt mig det, ville jeg aldrig have fundet ud af det."],
+      "accept_also": ["Havde du ikke fortalt mig det ville jeg aldrig have fundet ud af det."]
+    },
+    "metadata": { "tts_speed": "normal", "repeat_allowed": true, "focus": "comprehension", "tts_required": true }
+  }
+]
