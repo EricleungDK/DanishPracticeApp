@@ -24,15 +24,23 @@ Setting up project configuration and documentation. Next: scaffold Electron + Re
 
 ## Known Issues
 
-None yet.
+- Fill-blank explanation shows Danish answer word in English translation line (fix planned — see report)
 
 ## Active Delegations
 
 | Sub-Agent | Task ID | Status | Started | Expected Completion |
 |-----------|---------|--------|---------|-------------------|
+| systematic-debugger | fill-blank-translation | COMPLETED | 2026-03-18 | 2026-03-18 |
+| systematic-debugger | sqljs-module-not-found | COMPLETED | 2026-03-18 | 2026-03-18 |
+| systematic-debugger | no-window-on-launch | COMPLETED | 2026-03-18 | 2026-03-18 |
+| systematic-debugger | exports-undefined | COMPLETED | 2026-03-18 | 2026-03-18 |
 
 ## Activity Log
 
 | Date | Agent | Action |
 |------|-------|--------|
 | 2026-03-16 | parent | Initial project setup — CLAUDE.md, agents, .agent/ docs |
+| 2026-03-18 | systematic-debugger | Identified root cause of fill-blank translation bug; report at .agent/Reports/debugger-20260318-fill-blank-translation.md |
+| 2026-03-18 | systematic-debugger | Identified root cause of sql.js "Cannot find module" in packaged app; report at .agent/Reports/debugger-20260318-sqljs-module-not-found.md |
+| 2026-03-18 | systematic-debugger | Identified two causes of no-window-on-launch: (1) Squirrel first-run is normal, (2) sql-wasm.wasm missing from build output causes silent crash; report at .agent/Reports/debugger-20260318-no-window-on-launch.md |
+| 2026-03-18 | systematic-debugger | Identified root cause of exports-undefined crash: sql.js removed from externals causes d=void 0 + d.exports=s crash in bundled Emscripten code; fix: external+renderChunk rewrite+copy sql-wasm.js; report at .agent/Reports/debugger-20260318-exports-undefined.md |

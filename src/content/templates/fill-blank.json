@@ -6,7 +6,7 @@
     "topic": "daily life",
     "danish_text": "Jeg ___ altid tidligt op om morgenen.",
     "english_text": "I always ___ up early in the morning.",
-    "answer_key": { "correct": ["står"], "accept_also": ["staar"] },
+    "answer_key": { "correct": ["står"], "accept_also": ["staar"], "answer_en": "get" },
     "metadata": { "hint": "Present tense of 'at stå'", "grammar_point": "present tense regular verbs" }
   },
   {
@@ -16,7 +16,7 @@
     "topic": "food",
     "danish_text": "Kan jeg få ___ kop kaffe, tak?",
     "english_text": "Can I have ___ cup of coffee, please?",
-    "answer_key": { "correct": ["en"], "accept_also": [] },
+    "answer_key": { "correct": ["en"], "accept_also": [], "answer_en": "a" },
     "metadata": { "hint": "Common gender article", "grammar_point": "articles (en/et)" }
   },
   {
@@ -26,7 +26,7 @@
     "topic": "travel",
     "danish_text": "Toget afgår ___ København klokken ti.",
     "english_text": "The train departs ___ Copenhagen at ten o'clock.",
-    "answer_key": { "correct": ["fra"], "accept_also": [] },
+    "answer_key": { "correct": ["fra"], "accept_also": [], "answer_en": "from" },
     "metadata": { "hint": "Preposition meaning 'from'", "grammar_point": "prepositions of movement" }
   },
   {
@@ -36,7 +36,7 @@
     "topic": "weather",
     "danish_text": "Det ___ meget koldt i går.",
     "english_text": "It ___ very cold yesterday.",
-    "answer_key": { "correct": ["var"], "accept_also": [] },
+    "answer_key": { "correct": ["var"], "accept_also": [], "answer_en": "was" },
     "metadata": { "hint": "Past tense of 'at være'", "grammar_point": "past tense irregular verbs" }
   },
   {
@@ -46,7 +46,7 @@
     "topic": "shopping",
     "danish_text": "Hvor meget ___ den her jakke?",
     "english_text": "How much does this jacket ___?",
-    "answer_key": { "correct": ["koster"], "accept_also": [] },
+    "answer_key": { "correct": ["koster"], "accept_also": [], "answer_en": "cost" },
     "metadata": { "hint": "Present tense of 'at koste'", "grammar_point": "present tense regular verbs" }
   },
   {
@@ -56,7 +56,7 @@
     "topic": "family",
     "danish_text": "Min bror er ___ end mig.",
     "english_text": "My brother is ___ than me.",
-    "answer_key": { "correct": ["ældre"], "accept_also": ["aeldre"] },
+    "answer_key": { "correct": ["ældre"], "accept_also": ["aeldre"], "answer_en": "older" },
     "metadata": { "hint": "Comparative form of 'gammel'", "grammar_point": "comparative adjectives" }
   },
   {
@@ -66,7 +66,7 @@
     "topic": "work",
     "danish_text": "Hun ___ som lærer på en folkeskole.",
     "english_text": "She ___ as a teacher at a primary school.",
-    "answer_key": { "correct": ["arbejder"], "accept_also": [] },
+    "answer_key": { "correct": ["arbejder"], "accept_also": [], "answer_en": "works" },
     "metadata": { "hint": "Present tense of 'at arbejde'", "grammar_point": "present tense regular verbs" }
   },
   {
@@ -76,7 +76,7 @@
     "topic": "socializing",
     "danish_text": "Vi ___ gerne invitere dig til festen.",
     "english_text": "We ___ like to invite you to the party.",
-    "answer_key": { "correct": ["vil"], "accept_also": ["ville"] },
+    "answer_key": { "correct": ["vil"], "accept_also": ["ville"], "answer_en": "would" },
     "metadata": { "hint": "Modal verb expressing desire", "grammar_point": "modal verbs" }
   },
   {
@@ -86,7 +86,7 @@
     "topic": "health",
     "danish_text": "Jeg har ondt ___ hovedet.",
     "english_text": "I have a pain ___ my head.",
-    "answer_key": { "correct": ["i"], "accept_also": [] },
+    "answer_key": { "correct": ["i"], "accept_also": [], "answer_en": "in" },
     "metadata": { "hint": "Preposition used with body parts in Danish", "grammar_point": "prepositions with body parts" }
   },
   {
@@ -96,7 +96,7 @@
     "topic": "culture",
     "danish_text": "Hygge er ___ meget vigtig del af dansk kultur.",
     "english_text": "Hygge is ___ very important part of Danish culture.",
-    "answer_key": { "correct": ["en"], "accept_also": [] },
+    "answer_key": { "correct": ["en"], "accept_also": [], "answer_en": "a" },
     "metadata": { "hint": "Common gender indefinite article", "grammar_point": "articles (en/et)" }
   },
   {
@@ -106,7 +106,7 @@
     "topic": "daily life",
     "danish_text": "Børnene ___ i skole hver dag.",
     "english_text": "The children ___ to school every day.",
-    "answer_key": { "correct": ["går"], "accept_also": ["gaar"] },
+    "answer_key": { "correct": ["går"], "accept_also": ["gaar"], "answer_en": "go" },
     "metadata": { "hint": "Present tense of 'at gå'", "grammar_point": "present tense irregular verbs" }
   },
   {
@@ -116,7 +116,7 @@
     "topic": "food",
     "danish_text": "Vi spiser ___ et godt dansk smørrebrød.",
     "english_text": "We are eating ___ a good Danish open sandwich.",
-    "answer_key": { "correct": ["altid"], "accept_also": [] },
+    "answer_key": { "correct": ["altid"], "accept_also": [], "answer_en": "always" },
     "metadata": { "hint": "Adverb meaning 'always'", "grammar_point": "adverb placement in main clauses" }
   },
   {
@@ -126,7 +126,7 @@
     "topic": "travel",
     "danish_text": "Vi ___ til Aarhus i sidste uge.",
     "english_text": "We ___ to Aarhus last week.",
-    "answer_key": { "correct": ["rejste"], "accept_also": ["kørte"] },
+    "answer_key": { "correct": ["rejste"], "accept_also": ["kørte"], "answer_en": "traveled" },
     "metadata": { "hint": "Past tense of 'at rejse'", "grammar_point": "past tense regular verbs" }
   },
   {
@@ -136,7 +136,7 @@
     "topic": "shopping",
     "danish_text": "Jeg ___ købe et nyt par sko.",
     "english_text": "I ___ to buy a new pair of shoes.",
-    "answer_key": { "correct": ["skal"], "accept_also": [] },
+    "answer_key": { "correct": ["skal"], "accept_also": [], "answer_en": "need" },
     "metadata": { "hint": "Modal verb expressing intention/necessity", "grammar_point": "modal verbs" }
   },
   {
@@ -146,7 +146,7 @@
     "topic": "weather",
     "danish_text": "Det er ___ dejligt vejr i dag.",
     "english_text": "It is ___ lovely weather today.",
-    "answer_key": { "correct": ["rigtig"], "accept_also": ["virkelig"] },
+    "answer_key": { "correct": ["rigtig"], "accept_also": ["virkelig"], "answer_en": "really" },
     "metadata": { "hint": "Adverb meaning 'really/very'", "grammar_point": "adverbs of degree" }
   },
   {
@@ -156,7 +156,7 @@
     "topic": "work",
     "danish_text": "Hvis jeg ___ mere tid, ville jeg tage kurset.",
     "english_text": "If I ___ more time, I would take the course.",
-    "answer_key": { "correct": ["havde"], "accept_also": [] },
+    "answer_key": { "correct": ["havde"], "accept_also": [], "answer_en": "had" },
     "metadata": { "hint": "Past tense in conditional clause", "grammar_point": "conditional sentences (if-clauses)" }
   },
   {
@@ -166,7 +166,7 @@
     "topic": "culture",
     "danish_text": "Den film, ___ vi så i går, var fantastisk.",
     "english_text": "The film ___ we saw yesterday was fantastic.",
-    "answer_key": { "correct": ["som"], "accept_also": ["der"] },
+    "answer_key": { "correct": ["som"], "accept_also": ["der"], "answer_en": "that" },
     "metadata": { "hint": "Relative pronoun in object position", "grammar_point": "relative pronouns (som/der)" }
   },
   {
@@ -176,7 +176,7 @@
     "topic": "health",
     "danish_text": "Lægen anbefalede, at jeg ___ holde op med at ryge.",
     "english_text": "The doctor recommended that I ___ stop smoking.",
-    "answer_key": { "correct": ["skulle"], "accept_also": [] },
+    "answer_key": { "correct": ["skulle"], "accept_also": [], "answer_en": "should" },
     "metadata": { "hint": "Modal verb in reported speech", "grammar_point": "reported speech with modal verbs" }
   },
   {
@@ -186,7 +186,7 @@
     "topic": "socializing",
     "danish_text": "Han opførte sig, ___ om han var ligeglad.",
     "english_text": "He behaved ___ if he didn't care.",
-    "answer_key": { "correct": ["som"], "accept_also": [] },
+    "answer_key": { "correct": ["som"], "accept_also": [], "answer_en": "as" },
     "metadata": { "hint": "Conjunction used in comparisons", "grammar_point": "conjunctions (som om)" }
   },
   {
@@ -196,7 +196,7 @@
     "topic": "daily life",
     "danish_text": "Jo mere man øver sig, ___ bedre bliver man.",
     "english_text": "The more one practices, ___ better one becomes.",
-    "answer_key": { "correct": ["desto"], "accept_also": ["jo"] },
+    "answer_key": { "correct": ["desto"], "accept_also": ["jo"], "answer_en": "the" },
     "metadata": { "hint": "Correlative conjunction 'the...the'", "grammar_point": "correlative conjunctions (jo/desto)" }
   },
   {
@@ -206,7 +206,7 @@
     "topic": "travel",
     "danish_text": "Inden vi ___ afsted, skal vi pakke kufferten.",
     "english_text": "Before we ___ off, we need to pack the suitcase.",
-    "answer_key": { "correct": ["tager"], "accept_also": [] },
+    "answer_key": { "correct": ["tager"], "accept_also": [], "answer_en": "head" },
     "metadata": { "hint": "Present tense in temporal subordinate clause", "grammar_point": "tense in subordinate clauses" }
   },
   {
@@ -216,7 +216,7 @@
     "topic": "food",
     "danish_text": "Maden blev ___ af den bedste kok i byen.",
     "english_text": "The food was ___ by the best chef in town.",
-    "answer_key": { "correct": ["tilberedt"], "accept_also": ["lavet"] },
+    "answer_key": { "correct": ["tilberedt"], "accept_also": ["lavet"], "answer_en": "prepared" },
     "metadata": { "hint": "Past participle in passive construction", "grammar_point": "passive voice (blive-passive)" }
   },
   {
@@ -226,7 +226,7 @@
     "topic": "family",
     "danish_text": "Mine forældre, ___ bor i Odense, besøger os i weekenden.",
     "english_text": "My parents, ___ live in Odense, are visiting us this weekend.",
-    "answer_key": { "correct": ["der"], "accept_also": ["som"] },
+    "answer_key": { "correct": ["der"], "accept_also": ["som"], "answer_en": "who" },
     "metadata": { "hint": "Relative pronoun in subject position", "grammar_point": "relative pronouns in non-restrictive clauses" }
   },
   {
@@ -236,7 +236,7 @@
     "topic": "work",
     "danish_text": "Rapporten ___ være færdig inden fredag.",
     "english_text": "The report ___ be finished by Friday.",
-    "answer_key": { "correct": ["skal"], "accept_also": ["bør", "må"] },
+    "answer_key": { "correct": ["skal"], "accept_also": ["bør", "må"], "answer_en": "must" },
     "metadata": { "hint": "Modal verb expressing obligation", "grammar_point": "modal verbs expressing obligation" }
   },
   {
@@ -246,7 +246,7 @@
     "topic": "weather",
     "danish_text": "Selvom det ___ hele dagen, gik vi en lang tur.",
     "english_text": "Although it ___ all day, we went for a long walk.",
-    "answer_key": { "correct": ["regnede"], "accept_also": [] },
+    "answer_key": { "correct": ["regnede"], "accept_also": [], "answer_en": "rained" },
     "metadata": { "hint": "Past tense in concessive clause", "grammar_point": "subordinate clauses with selvom" }
   },
   {
@@ -256,7 +256,7 @@
     "topic": "shopping",
     "danish_text": "Varen kan ___ inden for 30 dage.",
     "english_text": "The item can be ___ within 30 days.",
-    "answer_key": { "correct": ["returneres"], "accept_also": ["byttes"] },
+    "answer_key": { "correct": ["returneres"], "accept_also": ["byttes"], "answer_en": "returned" },
     "metadata": { "hint": "S-passive form", "grammar_point": "s-passive voice" }
   },
   {
@@ -266,7 +266,7 @@
     "topic": "culture",
     "danish_text": "Det er vigtigt, at man ___ sig med dansk historie.",
     "english_text": "It is important that one ___ oneself with Danish history.",
-    "answer_key": { "correct": ["beskæftiger"], "accept_also": ["interesserer"] },
+    "answer_key": { "correct": ["beskæftiger"], "accept_also": ["interesserer"], "answer_en": "familiarizes" },
     "metadata": { "hint": "Reflexive verb in subordinate clause", "grammar_point": "reflexive verbs in subordinate clauses" }
   },
   {
@@ -276,7 +276,7 @@
     "topic": "health",
     "danish_text": "Havde jeg ___ det, ville jeg have handlet anderledes.",
     "english_text": "Had I ___ that, I would have acted differently.",
-    "answer_key": { "correct": ["vidst"], "accept_also": [] },
+    "answer_key": { "correct": ["vidst"], "accept_also": [], "answer_en": "known" },
     "metadata": { "hint": "Past participle of 'at vide'", "grammar_point": "past perfect in counterfactual conditionals" }
   },
   {
@@ -286,7 +286,7 @@
     "topic": "socializing",
     "danish_text": "Hun sagde, at hun ___ komme, hvis hun kunne.",
     "english_text": "She said that she ___ come if she could.",
-    "answer_key": { "correct": ["ville"], "accept_also": [] },
+    "answer_key": { "correct": ["ville"], "accept_also": [], "answer_en": "would" },
     "metadata": { "hint": "Modal verb in indirect speech", "grammar_point": "indirect speech with conditional" }
   },
   {
@@ -296,7 +296,7 @@
     "topic": "family",
     "danish_text": "Det barn, ___ forældre er danske, taler flydende dansk.",
     "english_text": "That child, ___ parents are Danish, speaks fluent Danish.",
-    "answer_key": { "correct": ["hvis"], "accept_also": [] },
+    "answer_key": { "correct": ["hvis"], "accept_also": [], "answer_en": "whose" },
     "metadata": { "hint": "Possessive relative pronoun", "grammar_point": "possessive relative pronoun (hvis)" }
   }
 ]

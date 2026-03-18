@@ -36,7 +36,8 @@ function explainFillBlank(exercise: Exercise, userAnswer: string, correct: boole
 
   // Full sentence
   parts.push(`Full sentence: "${fullSentence}"`);
-  parts.push(`Translation: "${exercise.english_text.replace('___', key.correct[0])}"`);
+  const englishAnswer = key.answer_en ?? key.correct[0];
+  parts.push(`Translation: "${exercise.english_text.replace('___', englishAnswer)}"`);
 
   // Grammar point
   if (meta?.grammar_point) {

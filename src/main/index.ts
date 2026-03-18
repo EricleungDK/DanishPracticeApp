@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, dialog } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
 import { initDatabase, closeDatabase } from './db/connection';
@@ -31,9 +31,14 @@ const createWindow = () => {
 };
 
 app.on('ready', async () => {
-  await initDatabase();
-  registerIpcHandlers();
-  createWindow();
+  try {
+    await initDatabase();
+    registerIpcHandlers();
+    createWindow();
+  } catch (err) {
+    dialog.showErrorBox('Startup Error', String(err));
+    app.quit();
+  }
 });
 
 app.on('window-all-closed', () => {

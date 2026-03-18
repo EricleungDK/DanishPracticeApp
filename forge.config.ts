@@ -6,14 +6,29 @@ import { MakerRpm } from '@electron-forge/maker-rpm';
 import { VitePlugin } from '@electron-forge/plugin-vite';
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
+import fs from 'node:fs';
+import path from 'node:path';
 
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
   },
+  hooks: {
+    postMake: async (_config, results) => {
+      for (const result of results) {
+        for (const artifact of result.artifacts) {
+          if (artifact.endsWith('.exe')) {
+            const dest = path.join(__dirname, path.basename(artifact));
+            fs.copyFileSync(artifact, dest);
+          }
+        }
+      }
+      return results;
+    },
+  },
   rebuildConfig: {},
   makers: [
-    new MakerSquirrel({}),
+    new MakerSquirrel({ name: 'DanishPracticeGenerator' }),
     new MakerZIP({}, ['darwin']),
     new MakerRpm({}),
     new MakerDeb({}),

@@ -8,6 +8,8 @@ import { seedDatabase } from './seed';
 let db: Database | null = null;
 let dbPath: string = '';
 
+
+
 export function getDb(): Database {
   if (!db) {
     throw new Error('Database not initialized. Call initDatabase() first.');
@@ -16,7 +18,8 @@ export function getDb(): Database {
 }
 
 export async function initDatabase(): Promise<void> {
-  const SQL = await initSqlJs();
+  const wasmBinary = fs.readFileSync(path.join(__dirname, 'sql-wasm.wasm'));
+  const SQL = await initSqlJs({ wasmBinary });
 
   dbPath = path.join(app.getPath('userData'), 'danish-practice.db');
 

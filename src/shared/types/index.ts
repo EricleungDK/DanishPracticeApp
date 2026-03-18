@@ -4,6 +4,7 @@ export type Difficulty = 'B1' | 'B2';
 export interface FillBlankAnswerKey {
   correct: string[];
   accept_also: string[];
+  answer_en?: string;
 }
 
 export interface SentenceConstructionAnswerKey {
