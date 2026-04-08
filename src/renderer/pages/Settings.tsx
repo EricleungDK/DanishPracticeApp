@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAppStore } from '../store/useAppStore';
+import { getApiInstance } from '../lib/api-instance';
 import ThemeToggle from '../components/ui/ThemeToggle';
 
 export default function Settings() {
@@ -7,7 +8,7 @@ export default function Settings() {
   const loadDashboardData = useAppStore((s) => s.loadDashboardData);
 
   const handleReset = async () => {
-    await window.api.resetProgress();
+    await getApiInstance().resetProgress();
     setShowConfirm(false);
     loadDashboardData();
   };

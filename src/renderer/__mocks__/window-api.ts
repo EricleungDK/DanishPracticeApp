@@ -21,6 +21,7 @@ export function mockWindowApi() {
     getSetting: jest.fn().mockResolvedValue(undefined),
     getStats: jest.fn().mockResolvedValue(defaultStats),
     getStatsByType: jest.fn().mockResolvedValue([]),
+    getSynonyms: jest.fn().mockResolvedValue([]),
     resetProgress: jest.fn().mockResolvedValue({ success: true }),
   };
 }

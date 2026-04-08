@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutDashboard, PenLine, RefreshCw, Settings } from 'lucide-react';
+import { LayoutDashboard, PenLine, RefreshCw, Zap, Settings } from 'lucide-react';
 import { useAppStore, type Page } from '../store/useAppStore';
 import ThemeToggle from './ui/ThemeToggle';
 
@@ -7,6 +7,7 @@ const navItems: { page: Page; label: string; icon: React.ReactNode; accent: stri
   { page: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={18} />, accent: '#2563EB' },
   { page: 'exercise', label: 'Practice', icon: <PenLine size={18} />, accent: '#0891B2' },
   { page: 'review', label: 'Review', icon: <RefreshCw size={18} />, accent: '#D97706' },
+  { page: 'vocab-boost', label: 'Vocab Boost', icon: <Zap size={18} />, accent: '#8B5CF6' },
   { page: 'settings', label: 'Settings', icon: <Settings size={18} />, accent: '#6B7280' },
 ];
 
@@ -16,19 +17,21 @@ export default function Sidebar() {
   const stats = useAppStore((s) => s.stats);
   const sessionExercises = useAppStore((s) => s.sessionExercises);
   const sessionComplete = useAppStore((s) => s.sessionComplete);
+  const startPractice = useAppStore((s) => s.startPractice);
+  const startReview = useAppStore((s) => s.startReview);
 
   const handleNav = (page: Page) => {
     if (page === 'exercise') {
       if (sessionExercises.length > 0 && !sessionComplete) {
         navigate('exercise');
       } else {
-        navigate('dashboard');
+        startPractice();
       }
     } else if (page === 'review') {
       if (sessionExercises.length > 0 && !sessionComplete && currentPage === 'review') {
         navigate('review');
       } else {
-        navigate('dashboard');
+        startReview();
       }
     } else {
       navigate(page);

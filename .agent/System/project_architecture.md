@@ -1,20 +1,23 @@
 # Project Architecture — Danish Practice Generator
 
-**Last Updated**: 2026-03-21
+**Last Updated**: 2026-04-08
 
 ## Quick Overview
 
-Desktop application for practicing Danish at B1-B2 (CEFR) level. Generates exercises from pre-built templates and wordlists. Tracks progress using SM-2 spaced repetition. Fully offline.
+Desktop + Android application for practicing Danish at B1-B2 (CEFR) level. Generates exercises from pre-built templates and wordlists. Tracks progress using SM-2 spaced repetition. Fully offline.
+
+**Platforms**: Electron (Windows/macOS/Linux desktop) + Capacitor (Android, future iOS)
 
 ## Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
-| Runtime | Electron (Chromium + Node.js) |
+| Runtime | Electron (desktop) + Capacitor (mobile) |
 | UI | React 18 + TypeScript |
-| Build | electron-forge or electron-builder + Vite |
+| Build | electron-forge + Vite (desktop), Vite + Capacitor CLI + Gradle (Android) |
 | State | Zustand |
-| Database | sql.js (SQLite in-memory, persisted to disk) |
+| Database | sql.js via IPC (desktop), @capacitor-community/sqlite (mobile) |
+| API Layer | AppAPI interface + ApiProvider context (platform-agnostic) |
 | TTS | Web Speech API / system TTS via Electron |
 | Styling | Tailwind CSS 4.2 + CSS custom properties (theme system) |
 | Fonts | Outfit (sans) + Lora (serif) via @fontsource-variable |
@@ -36,23 +39,30 @@ src/
 │   │   └── queries/       # Query functions by domain
 │   └── tts/               # Text-to-speech bridge
 │
-├── renderer/              # React app (renderer process)
+├── renderer/              # React app (shared between desktop + mobile)
 │   ├── App.tsx            # Root component + router + AnimatePresence
+│   ├── main.tsx           # Electron entry point
+│   ├── main-mobile.tsx    # Capacitor entry point
 │   ├── index.css          # Theme system (CSS vars, fonts, light/dark)
+│   ├── lib/               # Platform utilities
+│   │   ├── api-instance.ts # API singleton for Zustand stores
+│   │   └── safe-area.ts   # Mobile safe area insets
 │   ├── components/        # Reusable UI components
-│   │   ├── Layout.tsx     # Responsive flex layout + skip link
+│   │   ├── Layout.tsx     # Responsive flex layout + safe area padding
 │   │   ├── Sidebar.tsx    # Responsive nav (sidebar/bottom nav)
 │   │   ├── ui/            # ThemeToggle, shared UI primitives
 │   │   ├── charts/        # StreakCalendar, SkillRadar, SessionHistoryChart
-│   │   └── exercises/     # FillBlank, SentenceConstruction, Reading, Listening
+│   │   ├── exercises/     # FillBlank, SentenceConstruction, Reading, Listening
+│   │   └── vocab-boost/   # VocabQuizCard, VocabScoreBar, VocabSessionSummary
 │   ├── pages/             # Page-level components
 │   │   ├── Dashboard.tsx  # Stats + charts + exercise picker
 │   │   ├── Exercise.tsx   # Exercise session
 │   │   ├── Review.tsx     # Spaced repetition review
+│   │   ├── VocabBoost.tsx # Danish synonym quiz (Google Word Coach style)
 │   │   └── Settings.tsx   # Theme toggle + reset + about
 │   ├── hooks/             # Custom React hooks
 │   ├── __mocks__/         # Jest mocks (window-api, framer-motion, recharts)
-│   └── store/             # Zustand stores (theme, chartData, session)
+│   └── store/             # Zustand stores (theme, chartData, session, vocabBoost)
 │
 ├── content/               # Exercise content
 │   ├── templates/         # Exercise templates (JSON)
@@ -61,16 +71,28 @@ src/
 │
 ├── shared/                # Shared between processes
 │   ├── types/             # TypeScript interfaces
+│   │   ├── index.ts       # Domain types
+│   │   └── api.ts         # AppAPI interface (14 methods)
 │   └── constants/         # IPC channel names, etc.
+│
+├── mobile/                # Capacitor mobile entry
+│   └── index.html         # Mobile HTML shell (viewport-fit=cover)
 │
 └── preload/               # Electron preload scripts
     └── preload.ts         # Expose safe APIs to renderer
 
-# Test files live alongside source in __tests__/ dirs:
-# src/shared/__tests__/smoke.test.ts
-# src/renderer/__tests__/theme.test.ts
-# src/renderer/components/__tests__/Sidebar.test.tsx
-# etc.
+packages/
+└── data-layer/            # Platform-agnostic data access
+    └── src/
+        ├── api-provider.tsx    # React context + useApi() hook
+        ├── electron-api.ts     # Desktop: wraps window.api
+        ├── capacitor-api.ts    # Mobile: direct SQLite via @capacitor-community/sqlite
+        ├── migrations.ts       # Schema definitions for Capacitor
+        └── index.ts
+
+android/                   # Capacitor Android project (Gradle)
+scripts/
+└── release.js             # Bumps version, builds AAB + exe
 ```
 
 ## Test Infrastructure
@@ -80,7 +102,7 @@ src/
 - **Mocks**: `src/renderer/__mocks__/window-api.ts` (IPC), `framer-motion.tsx`, `recharts.tsx`
 - **Path aliases**: Mapped in jest.config.ts to match tsconfig paths
 - **Approach**: TDD — write failing tests first, implement to pass, refactor
-- **Test count**: 51 tests across 16 suites
+- **Test count**: 56 tests across 17 suites
 
 ## UI Design System
 
@@ -109,6 +131,7 @@ src/
 | `db:get-setting` | renderer→main | Read persisted setting |
 | `db:get-stats` | renderer→main | Get overall stats |
 | `db:get-stats-by-type` | renderer→main | Get accuracy per exercise type |
+| `db:get-synonyms` | renderer→main | Fetch synonym pairs with filters |
 | `db:reset-progress` | renderer→main | Clear all progress |
 
 ## Exercise Types
@@ -119,17 +142,19 @@ src/
 | Sentence construction | Build sentence from given words | Word set + grammar rule | User arranges words |
 | Reading comprehension | Read passage, answer questions | Passage + question set | Multiple choice / free text |
 | Listening | Listen to TTS, transcribe or answer | Danish text (spoken via TTS) | User types/selects answer |
+| Vocab Boost | Danish synonym matching quiz | Synonym pairs + distractors | User picks from 4 choices |
 
-## IPC Architecture
+## API Architecture
 
 ```
-Renderer (React)  ←→  Preload (contextBridge)  ←→  Main (Node.js + SQLite)
+Desktop:  Renderer → getApiInstance() → window.api (preload IPC) → Main (sql.js)
+Mobile:   Renderer → getApiInstance() → capacitor-api.ts → @capacitor-community/sqlite
 ```
 
-- Renderer calls exposed API functions via `window.api.*`
-- Preload exposes safe subset via `contextBridge.exposeInMainWorld`
-- Main handles IPC with `ipcMain.handle()` for async request/response
-- All SQLite access happens in main process only
+- `AppAPI` interface (`src/shared/types/api.ts`) defines 14 methods
+- `ApiProvider` React context wraps app, `getApiInstance()` singleton for Zustand stores
+- Desktop: preload bridges renderer to main process via IPC
+- Mobile: capacitor-api.ts accesses SQLite directly (no IPC needed)
 
 ## Spaced Repetition (SM-2)
 

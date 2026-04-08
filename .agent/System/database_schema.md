@@ -1,7 +1,8 @@
 # Database Schema — Danish Practice Generator
 
-**Last Updated**: 2026-03-16
-**Engine**: SQLite (via better-sqlite3)
+**Last Updated**: 2026-04-08
+**Engine**: SQLite — sql.js (desktop), @capacitor-community/sqlite (mobile)
+**Migrations**: 2 versions in `src/main/db/migrate.ts` + `packages/data-layer/src/migrations.ts`
 
 ## Tables
 
@@ -71,6 +72,21 @@ User preferences (key-value store).
 | key | TEXT | PRIMARY KEY | Setting name |
 | value | TEXT | NOT NULL | Setting value (JSON for complex) |
 
+### synonyms
+Danish synonym pairs for Vocabulary Boost quiz. (Migration v2)
+
+| Column | Type | Constraints | Description |
+|--------|------|------------|-------------|
+| id | TEXT | PRIMARY KEY | syn-001, syn-002, etc. |
+| word | TEXT | NOT NULL | Danish word |
+| synonym | TEXT | NOT NULL | Danish synonym |
+| part_of_speech | TEXT | NOT NULL | noun, verb, adjective, adverb |
+| topic | TEXT | | Category (emotions, work, etc.) |
+| cefr_level | TEXT | DEFAULT 'B1' | B1 or B2 |
+| example_da | TEXT | | Example sentence using word |
+| example_synonym_da | TEXT | | Example sentence using synonym |
+| hint_en | TEXT | | English gloss (shown after answering) |
+
 ## Relationships
 
 ```
@@ -87,4 +103,6 @@ CREATE INDEX idx_exercises_difficulty ON exercises(difficulty);
 CREATE INDEX idx_wordlists_cefr ON wordlists(cefr_level);
 CREATE INDEX idx_wordlists_topic ON wordlists(topic);
 CREATE INDEX idx_session_started ON session_history(started_at);
+CREATE INDEX idx_synonyms_pos ON synonyms(part_of_speech);
+CREATE INDEX idx_synonyms_topic ON synonyms(topic);
 ```

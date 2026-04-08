@@ -12,6 +12,7 @@ export const IPC_CHANNELS = {
   GET_STATS: 'db:get-stats',
   RESET_PROGRESS: 'db:reset-progress',
   GET_STATS_BY_TYPE: 'db:get-stats-by-type',
+  GET_SYNONYMS: 'db:get-synonyms',
 } as const;
 
 export const DEFAULT_EASE_FACTOR = 2.5;
@@ -38,3 +39,4 @@ export const TOPICS = [
 ] as const;
 
 export const EXERCISES_PER_SESSION = 10;
+export const VOCAB_BOOST_ROUNDS = 10;

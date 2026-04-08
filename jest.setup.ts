@@ -1,11 +1,16 @@
 import '@testing-library/jest-dom';
 import { mockWindowApi } from './src/renderer/__mocks__/window-api';
+import { setApiInstance } from './src/renderer/lib/api-instance';
 
 // Mock window.api (Electron preload bridge)
+const mockApi = mockWindowApi();
 Object.defineProperty(window, 'api', {
-  value: mockWindowApi(),
+  value: mockApi,
   writable: true,
 });
+
+// Set api instance for stores that use getApiInstance()
+setApiInstance(mockApi as any);
 
 // Mock window.matchMedia for theme tests
 Object.defineProperty(window, 'matchMedia', {

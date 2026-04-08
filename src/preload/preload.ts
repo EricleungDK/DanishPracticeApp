@@ -9,6 +9,8 @@ import type {
   SessionHistory,
   OverallStats,
   StatsByType,
+  SynonymEntry,
+  SynonymFilters,
 } from '../shared/types';
 
 const api = {
@@ -48,10 +50,11 @@ const api = {
   getStatsByType: (): Promise<StatsByType[]> =>
     ipcRenderer.invoke(IPC_CHANNELS.GET_STATS_BY_TYPE),
 
+  getSynonyms: (filters?: SynonymFilters): Promise<SynonymEntry[]> =>
+    ipcRenderer.invoke(IPC_CHANNELS.GET_SYNONYMS, filters),
+
   resetProgress: (): Promise<{ success: boolean }> =>
     ipcRenderer.invoke(IPC_CHANNELS.RESET_PROGRESS),
 };
 
 contextBridge.exposeInMainWorld('api', api);
-
-export type ApiType = typeof api;

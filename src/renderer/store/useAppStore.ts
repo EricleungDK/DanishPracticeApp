@@ -5,8 +5,9 @@ import { DEFAULT_EASE_FACTOR } from '../../shared/constants';
 import { checkAnswer } from '../../content/generators/answer-checker';
 import { generateExplanation } from '../../content/generators/explanation-generator';
 import { shuffleArray } from '../../content/generators/exercise-picker';
+import { getApiInstance } from '../lib/api-instance';
 
-export type Page = 'dashboard' | 'exercise' | 'review' | 'settings';
+export type Page = 'dashboard' | 'exercise' | 'review' | 'vocab-boost' | 'settings';
 export type Theme = 'light' | 'dark';
 
 interface SessionStats {
@@ -54,7 +55,7 @@ interface AppState {
 export const useAppStore = create<AppState>((set, get) => ({
   theme: 'light',
   loadTheme: async () => {
-    const saved = await window.api.getSetting('theme');
+    const saved = await getApiInstance().getSetting('theme');
     const theme: Theme = saved === 'dark' ? 'dark' : 'light';
     document.documentElement.classList.remove('light', 'dark');
     document.documentElement.classList.add(theme);
@@ -65,7 +66,7 @@ export const useAppStore = create<AppState>((set, get) => ({
     document.documentElement.classList.remove('light', 'dark');
     document.documentElement.classList.add(next);
     set({ theme: next });
-    await window.api.saveSetting('theme', next);
+    await getApiInstance().saveSetting('theme', next);
   },
 
   currentPage: 'dashboard',
@@ -79,7 +80,7 @@ export const useAppStore = create<AppState>((set, get) => ({
 
   loadDashboardData: async () => {
     try {
-      const stats = await window.api.getStats();
+      const stats = await getApiInstance().getStats();
       set({ stats });
       get().loadChartData();
     } catch (e) {
@@ -90,8 +91,8 @@ export const useAppStore = create<AppState>((set, get) => ({
   loadChartData: async () => {
     try {
       const [sessions, statsByType] = await Promise.all([
-        window.api.getSessionHistory(20),
-        window.api.getStatsByType(),
+        getApiInstance().getSessionHistory(20),
+        getApiInstance().getStatsByType(),
       ]);
 
       const sessionHistory = sessions.map((s: SessionHistory) => ({
@@ -122,7 +123,7 @@ export const useAppStore = create<AppState>((set, get) => ({
 
   startPractice: async (type, difficulty) => {
     try {
-      const all = await window.api.getExercises({ type, difficulty });
+      const all = await getApiInstance().getExercises({ type, difficulty });
       const shuffled = shuffleArray(all).slice(0, 10);
       set({
         sessionExercises: shuffled,
@@ -140,7 +141,7 @@ export const useAppStore = create<AppState>((set, get) => ({
 
   startReview: async () => {
     try {
-      const due = await window.api.getDueExercises();
+      const due = await getApiInstance().getDueExercises();
       const exercises = due.slice(0, 10);
       set({
         sessionExercises: exercises,
@@ -187,7 +188,7 @@ export const useAppStore = create<AppState>((set, get) => ({
       const exercise = sessionExercises[currentIndex];
       if (!exercise) return;
 
-      const existing = await window.api.getProgress(exercise.id);
+      const existing = await getApiInstance().getProgress(exercise.id);
 
       const sm2Result = sm2(
         quality,
@@ -208,7 +209,7 @@ export const useAppStore = create<AppState>((set, get) => ({
         last_review: new Date().toISOString().split('T')[0],
         quality_history: history,
       };
-      await window.api.saveProgress(progress);
+      await getApiInstance().saveProgress(progress);
 
       const newCompleted = sessionStats.completed + 1;
       const newCorrect = sessionStats.correct + (lastResult?.correct ? 1 : 0);
@@ -241,7 +242,7 @@ export const useAppStore = create<AppState>((set, get) => ({
             ? Math.round((sessionStats.correct / sessionStats.completed) * 100)
             : 0,
       };
-      await window.api.saveSession(session);
+      await getApiInstance().saveSession(session);
       set({ currentPage: 'dashboard' });
       get().loadDashboardData();
     } catch (e) {

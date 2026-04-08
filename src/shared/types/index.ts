@@ -123,6 +123,31 @@ export interface ExerciseFilters {
   topic?: string;
 }
 
+export interface SynonymEntry {
+  id: string;
+  word: string;
+  synonym: string;
+  part_of_speech: string;
+  topic: string;
+  cefr_level: Difficulty;
+  example_da?: string;
+  example_synonym_da?: string;
+  hint_en?: string;
+}
+
+export interface SynonymFilters {
+  topic?: string;
+  cefr_level?: Difficulty;
+  part_of_speech?: string;
+}
+
+export interface VocabRound {
+  entry: SynonymEntry;
+  prompt: string;
+  choices: string[];
+  correctIndex: number;
+}
+
 export interface WordlistFilters {
   cefr_level?: Difficulty;
   topic?: string;

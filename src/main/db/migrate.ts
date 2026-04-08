@@ -71,6 +71,25 @@ const migrations: Migration[] = [
       CREATE INDEX IF NOT EXISTS idx_session_started ON session_history(started_at);
     `,
   },
+  {
+    version: 2,
+    name: 'create_synonyms',
+    up: `
+      CREATE TABLE IF NOT EXISTS synonyms (
+        id TEXT PRIMARY KEY,
+        word TEXT NOT NULL,
+        synonym TEXT NOT NULL,
+        part_of_speech TEXT NOT NULL,
+        topic TEXT,
+        cefr_level TEXT DEFAULT 'B1',
+        example_da TEXT,
+        example_synonym_da TEXT,
+        hint_en TEXT
+      );
+      CREATE INDEX IF NOT EXISTS idx_synonyms_pos ON synonyms(part_of_speech);
+      CREATE INDEX IF NOT EXISTS idx_synonyms_topic ON synonyms(topic);
+    `,
+  },
 ];
 
 export function runMigrations(db: Database): void {

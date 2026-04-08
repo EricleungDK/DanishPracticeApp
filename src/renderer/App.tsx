@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import Exercise from './pages/Exercise';
 import Review from './pages/Review';
 import Settings from './pages/Settings';
+import VocabBoost from './pages/VocabBoost';
 
 export default function App() {
   const currentPage = useAppStore((s) => s.currentPage);
@@ -25,6 +26,8 @@ export default function App() {
         return <Exercise />;
       case 'review':
         return <Review />;
+      case 'vocab-boost':
+        return <VocabBoost />;
       case 'settings':
         return <Settings />;
       default:

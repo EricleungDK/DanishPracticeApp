@@ -13,6 +13,7 @@ import {
 } from '../db/queries/progress';
 import { saveSession, getSessionHistory } from '../db/queries/sessions';
 import { getSetting, saveSetting } from '../db/queries/settings';
+import { getSynonyms } from '../db/queries/synonyms';
 
 export function registerIpcHandlers(): void {
   ipcMain.handle(IPC_CHANNELS.GET_EXERCISES, (_, filters) => {
@@ -112,6 +113,14 @@ export function registerIpcHandlers(): void {
   ipcMain.handle(IPC_CHANNELS.GET_STATS_BY_TYPE, () => {
     try {
       return getStatsByType(getDb());
+    } catch (e: any) {
+      return { error: e.message };
+    }
+  });
+
+  ipcMain.handle(IPC_CHANNELS.GET_SYNONYMS, (_, filters) => {
+    try {
+      return getSynonyms(getDb(), filters);
     } catch (e: any) {
       return { error: e.message };
     }
