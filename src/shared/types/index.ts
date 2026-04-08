@@ -111,6 +111,12 @@ export interface OverallStats {
   dueCount: number;
 }
 
+export interface StatsByType {
+  type: ExerciseType;
+  total: number;
+  correct: number;
+}
+
 export interface ExerciseFilters {
   type?: ExerciseType;
   difficulty?: Difficulty;
@@ -128,3 +134,14 @@ export interface AnswerResult {
   expected: string;
   userAnswer: string;
 }
+
+export interface ReadingAnswer {
+  answer: string | number;
+  question: ReadingQuestion;
+}
+
+export type ExerciseAnswer =
+  | { type: 'fill_blank'; value: string }
+  | { type: 'sentence_construction'; value: string[] }
+  | { type: 'reading'; value: ReadingAnswer }
+  | { type: 'listening'; value: string };

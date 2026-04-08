@@ -12,6 +12,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "jsx": "react-jsx",
+    "types": ["jest", "@testing-library/jest-dom"],
     "paths": {
       "@shared/*": ["src/shared/*"],
       "@main/*": ["src/main/*"],

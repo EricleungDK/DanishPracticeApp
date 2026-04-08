@@ -1,6 +1,6 @@
 # Development Workflow — Danish Practice Generator
 
-**Last Updated**: 2026-03-16
+**Last Updated**: 2026-03-21
 
 ## Setup
 
@@ -32,6 +32,9 @@
 
 ## Testing
 
-- `npm test` — Jest unit + integration tests
-- `npm run test:e2e` — Playwright Electron tests
+- `npm test` — Jest unit + integration tests (jsdom environment)
 - `npx tsc --noEmit` — Type checking
+- TDD approach: write failing tests → implement → verify green
+- Test files: `src/**/__tests__/*.test.ts(x)`
+- Window.api mock: `src/renderer/__mocks__/window-api.ts` (auto-loaded via jest.setup.ts)
+- CSS/font files mocked via identity-obj-proxy and fileMock.ts

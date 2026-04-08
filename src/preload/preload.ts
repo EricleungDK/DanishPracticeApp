@@ -8,6 +8,7 @@ import type {
   UserProgress,
   SessionHistory,
   OverallStats,
+  StatsByType,
 } from '../shared/types';
 
 const api = {
@@ -43,6 +44,9 @@ const api = {
 
   getStats: (): Promise<OverallStats> =>
     ipcRenderer.invoke(IPC_CHANNELS.GET_STATS),
+
+  getStatsByType: (): Promise<StatsByType[]> =>
+    ipcRenderer.invoke(IPC_CHANNELS.GET_STATS_BY_TYPE),
 
   resetProgress: (): Promise<{ success: boolean }> =>
     ipcRenderer.invoke(IPC_CHANNELS.RESET_PROGRESS),

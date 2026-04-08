@@ -11,6 +11,7 @@ export const IPC_CHANNELS = {
   GET_SETTING: 'db:get-setting',
   GET_STATS: 'db:get-stats',
   RESET_PROGRESS: 'db:reset-progress',
+  GET_STATS_BY_TYPE: 'db:get-stats-by-type',
 } as const;
 
 export const DEFAULT_EASE_FACTOR = 2.5;

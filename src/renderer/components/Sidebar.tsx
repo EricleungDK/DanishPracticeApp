@@ -1,11 +1,13 @@
 import React from 'react';
+import { LayoutDashboard, PenLine, RefreshCw, Settings } from 'lucide-react';
 import { useAppStore, type Page } from '../store/useAppStore';
+import ThemeToggle from './ui/ThemeToggle';
 
-const navItems: { page: Page; label: string; icon: string }[] = [
-  { page: 'dashboard', label: 'Dashboard', icon: '📊' },
-  { page: 'exercise', label: 'Practice', icon: '📝' },
-  { page: 'review', label: 'Review', icon: '🔄' },
-  { page: 'settings', label: 'Settings', icon: '⚙️' },
+const navItems: { page: Page; label: string; icon: React.ReactNode; accent: string }[] = [
+  { page: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={18} />, accent: '#2563EB' },
+  { page: 'exercise', label: 'Practice', icon: <PenLine size={18} />, accent: '#0891B2' },
+  { page: 'review', label: 'Review', icon: <RefreshCw size={18} />, accent: '#D97706' },
+  { page: 'settings', label: 'Settings', icon: <Settings size={18} />, accent: '#6B7280' },
 ];
 
 export default function Sidebar() {
@@ -17,11 +19,9 @@ export default function Sidebar() {
 
   const handleNav = (page: Page) => {
     if (page === 'exercise') {
-      // Resume existing session if one is active and not complete
       if (sessionExercises.length > 0 && !sessionComplete) {
         navigate('exercise');
       } else {
-        // No active session — go to dashboard to pick type
         navigate('dashboard');
       }
     } else if (page === 'review') {
@@ -39,41 +39,100 @@ export default function Sidebar() {
     sessionExercises.length > 0 && !sessionComplete && (currentPage === 'exercise' || currentPage === 'review');
 
   return (
-    <nav className="w-56 bg-gray-900 text-white flex flex-col">
-      <div className="p-5 border-b border-gray-700">
-        <h1 className="text-lg font-bold">Dansk Praksis</h1>
-        <p className="text-xs text-gray-400 mt-1">Danish Practice Generator</p>
+    <nav
+      aria-label="Main navigation"
+      className="
+        flex flex-row justify-around w-full h-16
+        md:flex-col md:justify-between md:w-56 md:h-auto
+        bg-[var(--color-bg-sidebar)] text-[var(--color-text-sidebar)]
+        border-r-0 md:border-r border-t md:border-t-0
+      "
+      style={{ borderColor: 'var(--color-sidebar-border)' }}
+    >
+      {/* Header — desktop only */}
+      <div
+        className="hidden md:block px-5 py-5"
+        style={{ borderBottom: '1px solid var(--color-sidebar-border)' }}
+      >
+        <h1 className="text-lg font-bold font-[family-name:var(--font-serif)] text-white">
+          Dansk Praksis
+        </h1>
+        <p className="text-xs mt-1" style={{ color: 'var(--color-text-tertiary)' }}>
+          Danish Practice Generator
+        </p>
       </div>
 
-      <div className="flex-1 py-4">
-        {navItems.map(({ page, label, icon }) => (
-          <button
-            key={page}
-            onClick={() => handleNav(page)}
-            className={`w-full flex items-center gap-3 px-5 py-3 text-sm transition-colors ${
-              currentPage === page
-                ? 'bg-blue-600 text-white'
-                : 'text-gray-300 hover:bg-gray-800 hover:text-white'
-            }`}
-          >
-            <span>{icon}</span>
-            <span>{label}</span>
-            {page === 'exercise' && hasActiveSession && currentPage === 'exercise' && (
-              <span className="ml-auto bg-green-500 text-white text-xs px-2 py-0.5 rounded-full">
-                live
-              </span>
-            )}
-            {page === 'review' && stats.dueCount > 0 && (
-              <span className="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
-                {stats.dueCount}
-              </span>
-            )}
-          </button>
-        ))}
+      {/* Nav items */}
+      <div className="flex flex-row justify-around w-full md:flex-col md:py-2 md:px-3 md:gap-0.5 md:w-auto">
+        {navItems.map(({ page, label, icon, accent }) => {
+          const isActive = currentPage === page;
+          return (
+            <button
+              key={page}
+              onClick={() => handleNav(page)}
+              aria-current={isActive ? 'page' : undefined}
+              className={`
+                relative flex items-center justify-center gap-3
+                px-3 py-2.5 md:px-3 md:py-2.5 md:rounded-lg
+                text-sm transition-all duration-150
+                ${isActive
+                  ? 'text-white'
+                  : 'text-[var(--color-text-sidebar)] hover:text-white'
+                }
+              `}
+              style={isActive ? {
+                backgroundColor: `${accent}20`,
+                boxShadow: `inset 3px 0 0 ${accent}`,
+              } : undefined}
+              onMouseEnter={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.backgroundColor = 'var(--color-bg-sidebar-hover)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.backgroundColor = '';
+                }
+              }}
+            >
+              <span style={{ color: isActive ? accent : undefined }}>{icon}</span>
+              <span className="hidden md:inline flex-1 text-left">{label}</span>
+              {page === 'exercise' && hasActiveSession && currentPage === 'exercise' && (
+                <span
+                  aria-label="Session active"
+                  className="ml-auto hidden md:inline text-xs px-2 py-0.5 rounded-full"
+                  style={{ backgroundColor: '#5B7F6A', color: 'white' }}
+                >
+                  live
+                </span>
+              )}
+              {page === 'review' && stats.dueCount > 0 && (
+                <span
+                  aria-label={`${stats.dueCount} reviews due`}
+                  className="
+                    absolute top-0.5 right-0.5 md:static md:ml-auto
+                    text-white text-xs font-bold
+                    min-w-[20px] h-5 md:min-w-[24px] md:h-auto
+                    flex items-center justify-center
+                    md:px-2 md:py-0.5 rounded-full
+                  "
+                  style={{ backgroundColor: '#C17D56' }}
+                >
+                  {stats.dueCount}
+                </span>
+              )}
+            </button>
+          );
+        })}
       </div>
 
-      <div className="p-4 border-t border-gray-700 text-xs text-gray-500">
-        v1.0.0
+      {/* Footer — desktop only */}
+      <div
+        className="hidden md:flex md:flex-col md:gap-2 px-4 py-3"
+        style={{ borderTop: '1px solid var(--color-sidebar-border)' }}
+      >
+        <ThemeToggle />
+        <span className="text-xs" style={{ color: 'var(--color-text-tertiary)' }}>v1.0.0</span>
       </div>
     </nav>
   );

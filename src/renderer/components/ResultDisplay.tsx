@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ChevronUp, ChevronDown } from 'lucide-react';
 
 interface ResultDisplayProps {
   correct: boolean;
@@ -8,56 +9,65 @@ interface ResultDisplayProps {
 }
 
 const qualityLabels = [
-  { value: 0, label: 'Complete blackout', color: 'bg-red-600' },
-  { value: 1, label: 'Wrong, but recognized', color: 'bg-red-400' },
-  { value: 2, label: 'Wrong, but easy to recall', color: 'bg-orange-400' },
-  { value: 3, label: 'Correct, hard recall', color: 'bg-yellow-400' },
-  { value: 4, label: 'Correct, some hesitation', color: 'bg-green-400' },
-  { value: 5, label: 'Perfect, instant recall', color: 'bg-green-600' },
+  { value: 0, label: 'Complete blackout' },
+  { value: 1, label: 'Wrong, but recognized' },
+  { value: 2, label: 'Wrong, but easy to recall' },
+  { value: 3, label: 'Correct, hard recall' },
+  { value: 4, label: 'Correct, some hesitation' },
+  { value: 5, label: 'Perfect, instant recall' },
 ];
+
+function ratingColor(v: number): string {
+  if (v <= 1) return 'bg-[var(--color-error)]';
+  if (v === 2) return 'bg-[var(--color-accent-secondary)]';
+  if (v === 3) return 'bg-[var(--color-warning)]';
+  return 'bg-[var(--color-success)]';
+}
 
 export default function ResultDisplay({ correct, expected, explanation, onRate }: ResultDisplayProps) {
   const [showExplanation, setShowExplanation] = useState(true);
 
   return (
     <div className="mt-6 space-y-4">
-      {/* Correct / Incorrect banner */}
       <div
-        className={`p-4 rounded-lg ${
-          correct ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'
+        role="alert"
+        className={`p-4 rounded-[var(--radius-card)] border ${
+          correct
+            ? 'bg-[var(--color-success-bg)] border-[var(--color-success-30)]'
+            : 'bg-[var(--color-error-bg)] border-[var(--color-error-30)]'
         }`}
       >
-        <p className={`font-bold ${correct ? 'text-green-700' : 'text-red-700'}`}>
+        <p className={`font-bold ${correct ? 'text-[var(--color-success)]' : 'text-[var(--color-error)]'}`}>
           {correct ? 'Correct!' : 'Incorrect'}
         </p>
         {!correct && (
-          <p className="text-sm text-gray-600 mt-1">
+          <p className="text-sm text-[var(--color-text-secondary)] mt-1">
             Expected: <span className="font-semibold">{expected}</span>
           </p>
         )}
       </div>
 
-      {/* Explanation */}
       {explanation && (
-        <div className="bg-indigo-50 border border-indigo-200 rounded-lg overflow-hidden">
+        <div className="bg-[var(--color-info-bg)] border border-[var(--color-info-30)] rounded-[var(--radius-card)] overflow-hidden">
           <button
             onClick={() => setShowExplanation(!showExplanation)}
-            className="w-full flex items-center justify-between px-4 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-100 transition-colors"
+            aria-expanded={showExplanation}
+            className="w-full flex items-center justify-between px-4 py-2 text-sm font-medium text-[var(--color-info)] hover:opacity-80 transition-opacity"
           >
             <span>Explanation</span>
-            <span>{showExplanation ? '▲' : '▼'}</span>
+            {showExplanation ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           </button>
           {showExplanation && (
             <div className="px-4 pb-3 space-y-1.5">
               {explanation.split('\n').map((line, i) => (
-                <p key={i} className="text-sm text-indigo-900">
+                <p key={i} className="text-sm text-[var(--color-text-primary)]">
                   {line.startsWith('Tip:') || line.startsWith('Grammar:') || line.startsWith('Note:') ? (
                     <>
                       <span className="font-semibold">{line.split(':')[0]}:</span>
                       {line.substring(line.indexOf(':') + 1)}
                     </>
                   ) : line.startsWith('Differences:') || line.startsWith('Position') ? (
-                    <span className="text-red-700">{line}</span>
+                    <span className="text-[var(--color-error)]">{line}</span>
                   ) : (
                     line
                   )}
@@ -68,15 +78,14 @@ export default function ResultDisplay({ correct, expected, explanation, onRate }
         </div>
       )}
 
-      {/* Quality rating */}
       <div>
-        <p className="text-sm font-medium text-gray-700 mb-2">Rate your recall:</p>
+        <p className="text-sm font-medium text-[var(--color-text-secondary)] mb-2">Rate your recall:</p>
         <div className="grid grid-cols-3 gap-2">
-          {qualityLabels.map(({ value, label, color }) => (
+          {qualityLabels.map(({ value, label }) => (
             <button
               key={value}
               onClick={() => onRate(value)}
-              className={`${color} text-white text-xs px-3 py-2 rounded-lg hover:opacity-90 transition-opacity`}
+              className={`${ratingColor(value)} text-white text-xs px-3 py-2 rounded-[var(--radius-button)] hover:opacity-90 transition-opacity btn-hover`}
             >
               <span className="font-bold">{value}</span>
               <span className="block mt-0.5 opacity-90">{label}</span>

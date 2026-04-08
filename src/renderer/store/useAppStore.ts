@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { Exercise, ExerciseType, Difficulty, OverallStats, UserProgress } from '../../shared/types';
+import type { Exercise, ExerciseAnswer, ExerciseType, Difficulty, OverallStats, UserProgress, ReadingQuestion, StatsByType, SessionHistory } from '../../shared/types';
 import { sm2 } from '../../shared/sm2';
 import { DEFAULT_EASE_FACTOR } from '../../shared/constants';
 import { checkAnswer } from '../../content/generators/answer-checker';
@@ -7,6 +7,7 @@ import { generateExplanation } from '../../content/generators/explanation-genera
 import { shuffleArray } from '../../content/generators/exercise-picker';
 
 export type Page = 'dashboard' | 'exercise' | 'review' | 'settings';
+export type Theme = 'light' | 'dark';
 
 interface SessionStats {
   completed: number;
@@ -15,13 +16,24 @@ interface SessionStats {
 }
 
 interface AppState {
+  // Theme
+  theme: Theme;
+  loadTheme: () => Promise<void>;
+  toggleTheme: () => Promise<void>;
+
   // Navigation
   currentPage: Page;
   navigate: (page: Page) => void;
 
   // Dashboard
   stats: OverallStats;
+  chartData: {
+    sessionHistory: { date: string; score: number }[];
+    statsByType: StatsByType[];
+    dailyActivity: Record<string, number>;
+  };
   loadDashboardData: () => Promise<void>;
+  loadChartData: () => Promise<void>;
 
   // Exercise session
   sessionExercises: Exercise[];
@@ -33,13 +45,29 @@ interface AppState {
 
   startPractice: (type?: ExerciseType, difficulty?: Difficulty) => Promise<void>;
   startReview: () => Promise<void>;
-  submitAnswer: (answer: any) => void;
+  submitAnswer: (rawAnswer: string | string[] | { questionIndex: number; answer: string | number; question: ReadingQuestion }) => void;
   rateAndNext: (quality: number) => Promise<void>;
   endSession: () => Promise<void>;
   resetSession: () => void;
 }
 
 export const useAppStore = create<AppState>((set, get) => ({
+  theme: 'light',
+  loadTheme: async () => {
+    const saved = await window.api.getSetting('theme');
+    const theme: Theme = saved === 'dark' ? 'dark' : 'light';
+    document.documentElement.classList.remove('light', 'dark');
+    document.documentElement.classList.add(theme);
+    set({ theme });
+  },
+  toggleTheme: async () => {
+    const next: Theme = get().theme === 'light' ? 'dark' : 'light';
+    document.documentElement.classList.remove('light', 'dark');
+    document.documentElement.classList.add(next);
+    set({ theme: next });
+    await window.api.saveSetting('theme', next);
+  },
+
   currentPage: 'dashboard',
   navigate: (page) => {
     set({ currentPage: page });
@@ -47,13 +75,41 @@ export const useAppStore = create<AppState>((set, get) => ({
   },
 
   stats: { totalReviewed: 0, accuracy: 0, streak: 0, dueCount: 0 },
+  chartData: { sessionHistory: [], statsByType: [], dailyActivity: {} },
 
   loadDashboardData: async () => {
     try {
       const stats = await window.api.getStats();
       set({ stats });
+      get().loadChartData();
     } catch (e) {
       console.error('Failed to load dashboard data:', e);
+    }
+  },
+
+  loadChartData: async () => {
+    try {
+      const [sessions, statsByType] = await Promise.all([
+        window.api.getSessionHistory(20),
+        window.api.getStatsByType(),
+      ]);
+
+      const sessionHistory = sessions.map((s: SessionHistory) => ({
+        date: s.started_at.split('T')[0],
+        score: s.total_score || 0,
+      }));
+
+      const dailyActivity: Record<string, number> = {};
+      for (const s of sessions) {
+        const day = s.started_at.split('T')[0];
+        dailyActivity[day] = (dailyActivity[day] || 0) + s.exercises_completed;
+      }
+
+      set({
+        chartData: { sessionHistory, statsByType, dailyActivity },
+      });
+    } catch (e) {
+      console.error('Failed to load chart data:', e);
     }
   },
 
@@ -100,10 +156,22 @@ export const useAppStore = create<AppState>((set, get) => ({
     }
   },
 
-  submitAnswer: (answer) => {
+  submitAnswer: (rawAnswer) => {
     const { sessionExercises, currentIndex } = get();
     const exercise = sessionExercises[currentIndex];
     if (!exercise) return;
+
+    let answer: ExerciseAnswer;
+    if (exercise.type === 'fill_blank') {
+      answer = { type: 'fill_blank', value: rawAnswer as string };
+    } else if (exercise.type === 'sentence_construction') {
+      answer = { type: 'sentence_construction', value: rawAnswer as string[] };
+    } else if (exercise.type === 'reading') {
+      const raw = rawAnswer as { questionIndex: number; answer: string | number; question: ReadingQuestion };
+      answer = { type: 'reading', value: { answer: raw.answer, question: raw.question } };
+    } else {
+      answer = { type: 'listening', value: rawAnswer as string };
+    }
 
     const result = checkAnswer(exercise, answer);
     const explanation = generateExplanation(exercise, answer, result.correct);

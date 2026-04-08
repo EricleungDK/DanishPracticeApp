@@ -13,8 +13,10 @@ function sqlJsPlugin(): Plugin {
       const buildDir = path.resolve(__dirname, '.vite/build');
       for (const file of ['sql-wasm.js', 'sql-wasm.wasm']) {
         const src = path.join(distDir, file);
-        if (fs.existsSync(src)) {
+        try {
           fs.copyFileSync(src, path.join(buildDir, file));
+        } catch (err) {
+          throw new Error(`sql-js-plugin: missing ${src} — is sql.js installed?`);
         }
       }
     },

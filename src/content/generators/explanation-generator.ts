@@ -1,20 +1,20 @@
-import type { Exercise, FillBlankAnswerKey, SentenceConstructionAnswerKey, ReadingAnswerKey } from '../../shared/types';
+import type { Exercise, ExerciseAnswer, FillBlankAnswerKey, ReadingAnswer, SentenceConstructionAnswerKey } from '../../shared/types';
 import { normalizeDanish } from './answer-checker';
 
 export function generateExplanation(
   exercise: Exercise,
-  userAnswer: any,
+  userAnswer: ExerciseAnswer,
   correct: boolean,
 ): string {
-  switch (exercise.type) {
+  switch (userAnswer.type) {
     case 'fill_blank':
-      return explainFillBlank(exercise, userAnswer, correct);
+      return explainFillBlank(exercise, userAnswer.value, correct);
     case 'sentence_construction':
-      return explainSentenceConstruction(exercise, userAnswer, correct);
+      return explainSentenceConstruction(exercise, userAnswer.value, correct);
     case 'reading':
-      return explainReading(exercise, userAnswer, correct);
+      return explainReading(exercise, userAnswer.value, correct);
     case 'listening':
-      return explainListening(exercise, userAnswer, correct);
+      return explainListening(exercise, userAnswer.value, correct);
     default:
       return '';
   }
@@ -34,22 +34,19 @@ function explainFillBlank(exercise: Exercise, userAnswer: string, correct: boole
     parts.push(`The correct answer is "${correctWord}", not "${userAnswer}".`);
   }
 
-  // Full sentence
   parts.push(`Full sentence: "${fullSentence}"`);
-  const englishAnswer = key.answer_en ?? key.correct[0];
-  parts.push(`Translation: "${exercise.english_text.replace('___', englishAnswer)}"`);
+  if (key.answer_en) {
+    parts.push(`Translation: "${exercise.english_text.replace('___', key.answer_en)}"`);
+  }
 
-  // Grammar point
   if (meta?.grammar_point) {
     parts.push(`Grammar: ${meta.grammar_point}.`);
   }
 
-  // Hint as extra context
   if (meta?.hint) {
     parts.push(`Note: ${meta.hint}.`);
   }
 
-  // If wrong, try to explain what the user's answer might have confused
   if (!correct && userAnswer.trim()) {
     const userNorm = normalizeDanish(userAnswer);
     const correctNorm = normalizeDanish(correctWord);
@@ -76,7 +73,6 @@ function explainSentenceConstruction(exercise: Exercise, userOrder: string[], co
     parts.push(`Correct order: "${correctSentence}"`);
     parts.push(`Your order: "${userSentence}"`);
 
-    // Find which words are misplaced
     const misplaced: string[] = [];
     const correctNorm = key.correct_order.map(normalizeDanish);
     const userNorm = userOrder.map(normalizeDanish);
@@ -102,7 +98,6 @@ function explainSentenceConstruction(exercise: Exercise, userOrder: string[], co
     parts.push(`Key word: "${meta.focus_word}".`);
   }
 
-  // Common Danish word order tips
   if (!correct && meta?.grammar_point) {
     const gp = meta.grammar_point.toLowerCase();
     if (gp.includes('v2') || gp.includes('word order')) {
@@ -119,7 +114,7 @@ function explainSentenceConstruction(exercise: Exercise, userOrder: string[], co
   return parts.join('\n');
 }
 
-function explainReading(exercise: Exercise, userAnswer: any, correct: boolean): string {
+function explainReading(exercise: Exercise, userAnswer: ReadingAnswer, correct: boolean): string {
   const parts: string[] = [];
   const question = userAnswer.question;
 
@@ -127,7 +122,7 @@ function explainReading(exercise: Exercise, userAnswer: any, correct: boolean): 
     parts.push('Correct!');
   } else {
     if (question.type === 'multiple_choice' && question.options) {
-      parts.push(`Correct answer: "${question.options[question.correct_index]}"`);
+      parts.push(`Correct answer: "${question.options[question.correct_index!]}"`);
     } else if (question.correct) {
       parts.push(`Accepted answers: ${question.correct.join(', ')}`);
     }
@@ -156,7 +151,6 @@ function explainListening(exercise: Exercise, userAnswer: string, correct: boole
     parts.push(`Correct text: "${correctText}"`);
     parts.push(`Your transcription: "${userAnswer}"`);
 
-    // Compare word by word
     const correctWords = correctText.toLowerCase().split(/\s+/);
     const userWords = userAnswer.toLowerCase().split(/\s+/);
     const wrong: string[] = [];

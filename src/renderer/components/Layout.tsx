@@ -7,9 +7,17 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex flex-col-reverse md:flex-row h-screen bg-[var(--color-bg-primary)]">
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
       <Sidebar />
-      <main className="flex-1 overflow-y-auto px-[5%] py-8">{children}</main>
+      <main
+        id="main-content"
+        className="flex-1 overflow-y-auto px-4 md:px-[5%] py-6 md:py-8"
+      >
+        {children}
+      </main>
     </div>
   );
 }

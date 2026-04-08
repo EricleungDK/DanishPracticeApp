@@ -1,7 +1,187 @@
 @import "tailwindcss";
+@import "@fontsource-variable/outfit";
+@import "@fontsource-variable/lora";
+@import "@fontsource-variable/lora/wght-italic.css";
 
+/* ── Light theme (default) ── */
+:root {
+  --font-sans: 'Outfit Variable', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Lora Variable', 'Georgia', serif;
+
+  --color-bg-primary: #F7F8FA;
+  --color-bg-secondary: #FFFFFF;
+  --color-bg-tertiary: #F1F3F5;
+  --color-bg-sidebar: #1A2332;
+  --color-bg-sidebar-active: #2563EB;
+  --color-bg-sidebar-hover: #243044;
+  --color-sidebar-border: rgba(37, 99, 235, 0.2);
+
+  --color-text-primary: #111827;
+  --color-text-secondary: #4B5563;
+  --color-text-tertiary: #6B7280;
+  --color-text-sidebar: #E5E7EB;
+
+  --color-border-primary: #E5E7EB;
+  --color-border-secondary: #F1F3F5;
+
+  --color-accent-primary: #2563EB;
+  --color-accent-primary-hover: #1D4ED8;
+  --color-accent-secondary: #D97706;
+  --color-accent-secondary-hover: #B45309;
+
+  --color-success: #16A34A;
+  --color-success-bg: #F0FDF4;
+  --color-error: #DC2626;
+  --color-error-bg: #FEF2F2;
+  --color-warning: #D97706;
+  --color-warning-bg: #FFFBEB;
+  --color-info: #0891B2;
+  --color-info-bg: #ECFEFF;
+
+  /* Opacity variants (derived via color-mix) */
+  --color-accent-primary-10: color-mix(in srgb, var(--color-accent-primary) 10%, transparent);
+  --color-accent-primary-15: color-mix(in srgb, var(--color-accent-primary) 15%, transparent);
+  --color-accent-primary-20: color-mix(in srgb, var(--color-accent-primary) 20%, transparent);
+  --color-accent-primary-25: color-mix(in srgb, var(--color-accent-primary) 25%, transparent);
+  --color-accent-primary-50: color-mix(in srgb, var(--color-accent-primary) 50%, transparent);
+  --color-accent-primary-70: color-mix(in srgb, var(--color-accent-primary) 70%, transparent);
+  --color-accent-primary-75: color-mix(in srgb, var(--color-accent-primary) 75%, transparent);
+  --color-success-30: color-mix(in srgb, var(--color-success) 30%, transparent);
+  --color-error-30: color-mix(in srgb, var(--color-error) 30%, transparent);
+  --color-info-30: color-mix(in srgb, var(--color-info) 30%, transparent);
+  --color-warning-30: color-mix(in srgb, var(--color-warning) 30%, transparent);
+
+  --shadow-card: 0 1px 3px rgba(17, 24, 39, 0.06), 0 1px 2px rgba(17, 24, 39, 0.04);
+  --shadow-card-hover: 0 4px 12px rgba(17, 24, 39, 0.08), 0 2px 4px rgba(17, 24, 39, 0.04);
+  --radius-card: 12px;
+  --radius-button: 8px;
+  --radius-input: 8px;
+}
+
+/* ── Dark theme ── */
+.dark {
+  --color-bg-primary: #111827;
+  --color-bg-secondary: #1F2937;
+  --color-bg-tertiary: #374151;
+  --color-bg-sidebar: #0F172A;
+  --color-bg-sidebar-active: #1D4ED8;
+  --color-bg-sidebar-hover: #1E293B;
+  --color-sidebar-border: rgba(96, 165, 250, 0.15);
+
+  --color-text-primary: #F3F4F6;
+  --color-text-secondary: #D1D5DB;
+  --color-text-tertiary: #9CA3AF;
+  --color-text-sidebar: #CBD5E1;
+
+  --color-border-primary: #374151;
+  --color-border-secondary: #1F2937;
+
+  --color-accent-primary: #60A5FA;
+  --color-accent-primary-hover: #93C5FD;
+  --color-accent-secondary: #FBBF24;
+  --color-accent-secondary-hover: #FCD34D;
+
+  --color-success: #4ADE80;
+  --color-success-bg: #052E16;
+  --color-error: #F87171;
+  --color-error-bg: #450A0A;
+  --color-warning: #FBBF24;
+  --color-warning-bg: #451A03;
+  --color-info: #22D3EE;
+  --color-info-bg: #083344;
+
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Base ── */
 html, body, #root {
   height: 100%;
   margin: 0;
   overflow: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Focus ── */
+*:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Skip link ── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  padding: 8px 16px;
+  background: var(--color-accent-primary);
+  color: #fff;
+  border-radius: var(--radius-button);
+  z-index: 100;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+/* ── Button hover micro-interaction ── */
+.btn-hover {
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.btn-hover:hover {
+  transform: scale(1.03);
+}
+
+.btn-hover:active {
+  transform: scale(0.98);
+}
+
+/* ── Card hover ── */
+.card-hover {
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* ── Shimmer loading animation ── */
+@keyframes shimmer {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-primary);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
 }

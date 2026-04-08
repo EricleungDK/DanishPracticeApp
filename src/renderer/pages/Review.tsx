@@ -24,11 +24,11 @@ export default function Review() {
   if (sessionExercises.length === 0) {
     return (
       <div className="w-full max-w-3xl mx-auto text-center py-20">
-        <h2 className="text-2xl font-bold text-green-600 mb-2">All caught up!</h2>
-        <p className="text-gray-500">No exercises due for review. Come back later.</p>
+        <h2 className="text-2xl font-bold text-[var(--color-success)] mb-2">All caught up!</h2>
+        <p className="text-[var(--color-text-secondary)]">No exercises due for review. Come back later.</p>
         <button
           onClick={() => navigate('dashboard')}
-          className="mt-4 text-blue-600 hover:text-blue-700"
+          className="mt-4 text-[var(--color-accent-primary)] hover:text-[var(--color-accent-primary-hover)]"
         >
           Back to Dashboard
         </button>
@@ -44,16 +44,19 @@ export default function Review() {
 
     return (
       <div className="w-full max-w-xl mx-auto text-center py-16">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Review Complete!</h2>
-        <div className="bg-white rounded-xl shadow-sm border p-6 mt-6 space-y-3">
-          <p className="text-4xl font-bold text-green-600">{pct}%</p>
-          <p className="text-gray-500">
+        <h2 className="text-2xl font-bold text-[var(--color-text-primary)] mb-2">Review Complete!</h2>
+        <div
+          className="bg-[var(--color-bg-secondary)] rounded-[var(--radius-card)] border border-[var(--color-border-primary)] p-6 mt-6 space-y-3"
+          style={{ boxShadow: 'var(--shadow-card)' }}
+        >
+          <p className="text-4xl font-bold text-[var(--color-success)]">{pct}%</p>
+          <p className="text-[var(--color-text-secondary)]">
             {sessionStats.correct} / {sessionStats.completed} correct
           </p>
         </div>
         <button
           onClick={endSession}
-          className="mt-6 bg-blue-600 text-white px-8 py-3 rounded-xl hover:bg-blue-700 transition-colors"
+          className="mt-6 bg-[var(--color-accent-primary)] text-white px-8 py-3 rounded-[var(--radius-card)] hover:bg-[var(--color-accent-primary-hover)] transition-colors btn-hover"
         >
           Back to Dashboard
         </button>
@@ -82,7 +85,7 @@ export default function Review() {
 
   return (
     <div>
-      <p className="text-center text-sm text-orange-600 mb-4 font-medium">
+      <p className="text-center text-sm text-[var(--color-accent-secondary)] mb-4 font-medium">
         Review Mode — {sessionExercises.length} exercises due
       </p>
       <ExerciseCard exercise={exercise} index={currentIndex} total={sessionExercises.length}>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Volume2, Snail } from 'lucide-react';
 import type { Exercise } from '../../../shared/types';
 
 interface Props {
@@ -16,39 +17,33 @@ export default function ListeningExercise({ exercise, onSubmit, disabled }: Prop
     if (answer.trim()) onSubmit(answer);
   };
 
-  // Try using Web Speech API for TTS
-  const speak = () => {
+  const speak = (rate = 1) => {
     if ('speechSynthesis' in window) {
       const utterance = new SpeechSynthesisUtterance(exercise.danish_text);
       utterance.lang = 'da-DK';
-      utterance.rate = exercise.metadata?.tts_speed === 'slow' ? 0.7 : 1;
+      utterance.rate = rate;
       window.speechSynthesis.speak(utterance);
     }
   };
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-gray-500">Listen and type what you hear in Danish.</p>
+      <p className="text-sm text-[var(--color-text-secondary)]">Listen and type what you hear in Danish.</p>
 
       <div className="flex gap-3">
         <button
-          onClick={speak}
-          className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors flex items-center gap-2"
+          onClick={() => speak(exercise.metadata?.tts_speed === 'slow' ? 0.7 : 1)}
+          aria-label="Play Danish audio"
+          className="bg-[var(--color-accent-primary)] text-white px-6 py-3 rounded-[var(--radius-button)] hover:bg-[var(--color-accent-primary-hover)] transition-colors btn-hover flex items-center gap-2"
         >
-          <span className="text-lg">🔊</span> Play
+          <Volume2 size={20} /> Play
         </button>
         <button
-          onClick={() => {
-            if ('speechSynthesis' in window) {
-              const utterance = new SpeechSynthesisUtterance(exercise.danish_text);
-              utterance.lang = 'da-DK';
-              utterance.rate = 0.6;
-              window.speechSynthesis.speak(utterance);
-            }
-          }}
-          className="bg-purple-400 text-white px-4 py-3 rounded-lg hover:bg-purple-500 transition-colors"
+          onClick={() => speak(0.6)}
+          aria-label="Play Danish audio slowly"
+          className="bg-[var(--color-accent-primary-70)] text-white px-4 py-3 rounded-[var(--radius-button)] hover:bg-[var(--color-accent-primary)] transition-colors btn-hover flex items-center gap-2"
         >
-          🐢 Slow
+          <Snail size={18} /> Slow
         </button>
       </div>
 
@@ -58,14 +53,15 @@ export default function ListeningExercise({ exercise, onSubmit, disabled }: Prop
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
           disabled={disabled}
-          className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 disabled:opacity-50"
+          aria-label="Type what you hear"
+          className="flex-1 px-4 py-2 border border-[var(--color-border-primary)] rounded-[var(--radius-input)] bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent-primary)] disabled:opacity-50"
           placeholder="Type what you hear..."
           autoFocus
         />
         <button
           type="submit"
           disabled={disabled || !answer.trim()}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
+          className="bg-[var(--color-accent-primary)] text-white px-6 py-2 rounded-[var(--radius-button)] hover:bg-[var(--color-accent-primary-hover)] disabled:opacity-50 transition-colors btn-hover"
         >
           Check
         </button>
@@ -73,15 +69,15 @@ export default function ListeningExercise({ exercise, onSubmit, disabled }: Prop
 
       <button
         onClick={() => setRevealed(!revealed)}
-        className="text-xs text-gray-400 hover:text-gray-600"
+        className="text-xs text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors"
       >
         {revealed ? 'Hide text' : 'Reveal text (gives up)'}
       </button>
 
       {revealed && (
-        <div className="bg-amber-50 border border-amber-200 p-3 rounded-lg text-sm">
-          <p className="font-medium">{exercise.danish_text}</p>
-          <p className="text-gray-500 italic mt-1">{exercise.english_text}</p>
+        <div className="bg-[var(--color-warning-bg)] border border-[var(--color-warning-30)] p-3 rounded-[var(--radius-button)] text-sm">
+          <p className="font-medium font-[family-name:var(--font-serif)] text-[var(--color-text-primary)]">{exercise.danish_text}</p>
+          <p className="text-[var(--color-text-secondary)] italic mt-1">{exercise.english_text}</p>
         </div>
       )}
     </div>

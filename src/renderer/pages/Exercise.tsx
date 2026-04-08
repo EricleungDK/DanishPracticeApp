@@ -24,10 +24,10 @@ export default function Exercise() {
   if (sessionExercises.length === 0) {
     return (
       <div className="w-full max-w-3xl mx-auto text-center py-20">
-        <p className="text-gray-500 text-lg">No exercises available.</p>
+        <p className="text-[var(--color-text-secondary)] text-lg">No exercises available.</p>
         <button
           onClick={() => navigate('dashboard')}
-          className="mt-4 text-blue-600 hover:text-blue-700"
+          className="mt-4 text-[var(--color-accent-primary)] hover:text-[var(--color-accent-primary-hover)]"
         >
           Back to Dashboard
         </button>
@@ -43,16 +43,19 @@ export default function Exercise() {
 
     return (
       <div className="w-full max-w-xl mx-auto text-center py-16">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Session Complete!</h2>
-        <div className="bg-white rounded-xl shadow-sm border p-6 mt-6 space-y-3">
-          <p className="text-4xl font-bold text-blue-600">{pct}%</p>
-          <p className="text-gray-500">
+        <h2 className="text-2xl font-bold text-[var(--color-text-primary)] mb-2">Session Complete!</h2>
+        <div
+          className="bg-[var(--color-bg-secondary)] rounded-[var(--radius-card)] border border-[var(--color-border-primary)] p-6 mt-6 space-y-3"
+          style={{ boxShadow: 'var(--shadow-card)' }}
+        >
+          <p className="text-4xl font-bold text-[var(--color-accent-primary)]">{pct}%</p>
+          <p className="text-[var(--color-text-secondary)]">
             {sessionStats.correct} / {sessionStats.completed} correct
           </p>
         </div>
         <button
           onClick={endSession}
-          className="mt-6 bg-blue-600 text-white px-8 py-3 rounded-xl hover:bg-blue-700 transition-colors"
+          className="mt-6 bg-[var(--color-accent-primary)] text-white px-8 py-3 rounded-[var(--radius-card)] hover:bg-[var(--color-accent-primary-hover)] transition-colors btn-hover"
         >
           Back to Dashboard
         </button>
@@ -67,52 +70,20 @@ export default function Exercise() {
     const disabled = awaitingRating;
     switch (exercise.type) {
       case 'fill_blank':
-        return (
-          <FillBlankExercise
-            key={exercise.id}
-            exercise={exercise}
-            onSubmit={submitAnswer}
-            disabled={disabled}
-          />
-        );
+        return <FillBlankExercise key={exercise.id} exercise={exercise} onSubmit={submitAnswer} disabled={disabled} />;
       case 'sentence_construction':
-        return (
-          <SentenceConstructionExercise
-            key={exercise.id}
-            exercise={exercise}
-            onSubmit={submitAnswer}
-            disabled={disabled}
-          />
-        );
+        return <SentenceConstructionExercise key={exercise.id} exercise={exercise} onSubmit={submitAnswer} disabled={disabled} />;
       case 'reading':
-        return (
-          <ReadingExercise
-            key={exercise.id}
-            exercise={exercise}
-            onSubmit={submitAnswer}
-            disabled={disabled}
-          />
-        );
+        return <ReadingExercise key={exercise.id} exercise={exercise} onSubmit={submitAnswer} disabled={disabled} />;
       case 'listening':
-        return (
-          <ListeningExercise
-            key={exercise.id}
-            exercise={exercise}
-            onSubmit={submitAnswer}
-            disabled={disabled}
-          />
-        );
+        return <ListeningExercise key={exercise.id} exercise={exercise} onSubmit={submitAnswer} disabled={disabled} />;
       default:
         return <p>Unknown exercise type</p>;
     }
   };
 
   return (
-    <ExerciseCard
-      exercise={exercise}
-      index={currentIndex}
-      total={sessionExercises.length}
-    >
+    <ExerciseCard exercise={exercise} index={currentIndex} total={sessionExercises.length}>
       {renderExercise()}
       {lastResult && awaitingRating && (
         <ResultDisplay

@@ -7,8 +7,8 @@ import { seedDatabase } from './seed';
 
 let db: Database | null = null;
 let dbPath: string = '';
-
-
+let saveTimer: ReturnType<typeof setTimeout> | null = null;
+const SAVE_DEBOUNCE_MS = 2500;
 
 export function getDb(): Database {
   if (!db) {
@@ -18,13 +18,14 @@ export function getDb(): Database {
 }
 
 export async function initDatabase(): Promise<void> {
-  const wasmBinary = fs.readFileSync(path.join(__dirname, 'sql-wasm.wasm'));
+  const wasmBinary = await fs.promises.readFile(path.join(__dirname, 'sql-wasm.wasm'));
   const SQL = await initSqlJs({ wasmBinary });
 
   dbPath = path.join(app.getPath('userData'), 'danish-practice.db');
 
-  // Load existing database or create new one
-  if (fs.existsSync(dbPath)) {
+  const isNew = !fs.existsSync(dbPath);
+
+  if (!isNew) {
     const buffer = fs.readFileSync(dbPath);
     db = new SQL.Database(buffer);
   } else {
@@ -34,10 +35,18 @@ export async function initDatabase(): Promise<void> {
   db.run('PRAGMA foreign_keys = ON;');
   runMigrations(db);
   seedDatabase(db);
-  saveDb();
+
+  if (isNew) {
+    flushDb();
+  }
 }
 
-export function saveDb(): void {
+/** Write the DB to disk immediately, cancelling any pending debounced write. */
+export function flushDb(): void {
+  if (saveTimer !== null) {
+    clearTimeout(saveTimer);
+    saveTimer = null;
+  }
   if (db && dbPath) {
     const data = db.export();
     const buffer = Buffer.from(data);
@@ -45,9 +54,25 @@ export function saveDb(): void {
   }
 }
 
+/** Schedule a debounced write. Multiple rapid calls collapse into one write. */
+export function saveDb(): void {
+  if (!db || !dbPath) return;
+  if (saveTimer !== null) {
+    clearTimeout(saveTimer);
+  }
+  saveTimer = setTimeout(() => {
+    saveTimer = null;
+    if (db && dbPath) {
+      const data = db.export();
+      const buffer = Buffer.from(data);
+      fs.writeFileSync(dbPath, buffer);
+    }
+  }, SAVE_DEBOUNCE_MS);
+}
+
 export function closeDatabase(): void {
   if (db) {
-    saveDb();
+    flushDb();
     db.close();
     db = null;
   }

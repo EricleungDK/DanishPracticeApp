@@ -1,5 +1,6 @@
 import type {
   Exercise,
+  ExerciseAnswer,
   FillBlankAnswerKey,
   SentenceConstructionAnswerKey,
   ReadingQuestion,
@@ -70,23 +71,21 @@ export function checkReadingAnswer(
 
 export function checkAnswer(
   exercise: Exercise,
-  userAnswer: any,
+  userAnswer: ExerciseAnswer,
 ): AnswerResult {
-  switch (exercise.type) {
+  switch (userAnswer.type) {
     case 'fill_blank':
-      return checkFillBlank(userAnswer, exercise.answer_key as FillBlankAnswerKey);
+      return checkFillBlank(userAnswer.value, exercise.answer_key as FillBlankAnswerKey);
     case 'sentence_construction':
       return checkSentenceConstruction(
-        userAnswer,
+        userAnswer.value,
         exercise.answer_key as SentenceConstructionAnswerKey,
       );
     case 'reading':
-      // For reading, userAnswer should be { questionIndex, answer }
-      return checkReadingAnswer(userAnswer.answer, userAnswer.question);
+      return checkReadingAnswer(userAnswer.value.answer, userAnswer.value.question);
     case 'listening':
-      // Same as fill_blank for transcription mode
-      return checkFillBlank(userAnswer, exercise.answer_key as any);
+      return checkFillBlank(userAnswer.value, exercise.answer_key as FillBlankAnswerKey);
     default:
-      return { correct: false, expected: '', userAnswer: String(userAnswer) };
+      return { correct: false, expected: '', userAnswer: '' };
   }
 }

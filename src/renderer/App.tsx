@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAppStore } from './store/useAppStore';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
@@ -9,8 +10,10 @@ import Settings from './pages/Settings';
 export default function App() {
   const currentPage = useAppStore((s) => s.currentPage);
   const loadDashboardData = useAppStore((s) => s.loadDashboardData);
+  const loadTheme = useAppStore((s) => s.loadTheme);
 
   useEffect(() => {
+    loadTheme();
     loadDashboardData();
   }, []);
 
@@ -29,5 +32,19 @@ export default function App() {
     }
   };
 
-  return <Layout>{renderPage()}</Layout>;
+  return (
+    <Layout>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentPage}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.2, ease: 'easeInOut' }}
+        >
+          {renderPage()}
+        </motion.div>
+      </AnimatePresence>
+    </Layout>
+  );
 }

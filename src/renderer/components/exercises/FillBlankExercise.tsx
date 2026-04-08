@@ -17,12 +17,11 @@ export default function FillBlankExercise({ exercise, onSubmit, disabled }: Prop
     if (answer.trim()) onSubmit(answer);
   };
 
-  // Split danish text around the blank
   const parts = exercise.danish_text.split('___');
 
   return (
     <div className="space-y-4">
-      <div className="text-lg leading-relaxed">
+      <div className="text-lg leading-relaxed font-[family-name:var(--font-serif)] text-[var(--color-text-primary)]">
         {parts.map((part, i) => (
           <React.Fragment key={i}>
             <span>{part}</span>
@@ -33,7 +32,9 @@ export default function FillBlankExercise({ exercise, onSubmit, disabled }: Prop
                 onChange={(e) => setAnswer(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && answer.trim() && onSubmit(answer)}
                 disabled={disabled}
-                className="inline-block w-40 mx-1 px-3 py-1 border-b-2 border-blue-400 bg-blue-50 text-center focus:outline-none focus:border-blue-600 disabled:opacity-50"
+                aria-label="Fill in the blank"
+                aria-required="true"
+                className="inline-block w-40 mx-1 px-3 py-1 border-b-2 border-[var(--color-accent-primary)] bg-[var(--color-bg-tertiary)] text-center focus:outline-none focus:border-[var(--color-accent-primary-hover)] disabled:opacity-50 rounded-sm"
                 autoFocus
                 placeholder="..."
               />
@@ -42,13 +43,13 @@ export default function FillBlankExercise({ exercise, onSubmit, disabled }: Prop
         ))}
       </div>
 
-      <p className="text-sm text-gray-500 italic">{exercise.english_text}</p>
+      <p className="text-sm text-[var(--color-text-secondary)] italic">{exercise.english_text}</p>
 
       <div className="flex items-center gap-3">
         <button
           onClick={handleSubmit}
           disabled={disabled || !answer.trim()}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="bg-[var(--color-accent-primary)] text-white px-6 py-2 rounded-[var(--radius-button)] hover:bg-[var(--color-accent-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors btn-hover"
         >
           Check
         </button>
@@ -56,7 +57,8 @@ export default function FillBlankExercise({ exercise, onSubmit, disabled }: Prop
         {metadata?.hint && (
           <button
             onClick={() => setShowHint(!showHint)}
-            className="text-sm text-gray-400 hover:text-gray-600"
+            aria-expanded={showHint}
+            className="text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-secondary)] transition-colors"
           >
             {showHint ? 'Hide hint' : 'Show hint'}
           </button>
@@ -64,7 +66,7 @@ export default function FillBlankExercise({ exercise, onSubmit, disabled }: Prop
       </div>
 
       {showHint && metadata?.hint && (
-        <p className="text-sm text-amber-600 bg-amber-50 p-3 rounded">
+        <p className="text-sm text-[var(--color-warning)] bg-[var(--color-warning-bg)] p-3 rounded-[var(--radius-button)]">
           Hint: {metadata.hint}
         </p>
       )}

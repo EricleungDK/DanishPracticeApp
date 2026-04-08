@@ -16,7 +16,6 @@ export default function SentenceConstructionExercise({ exercise, onSubmit, disab
   const [dragSource, setDragSource] = useState<'selected' | 'available' | null>(null);
   const dropZoneRef = useRef<HTMLDivElement>(null);
 
-  // --- Drag from available → selected ---
   const handleAvailableDragStart = (e: React.DragEvent, word: string, index: number) => {
     if (disabled) return;
     e.dataTransfer.effectAllowed = 'move';
@@ -28,7 +27,6 @@ export default function SentenceConstructionExercise({ exercise, onSubmit, disab
   const handleDropOnAnswer = (e: React.DragEvent, insertAt?: number) => {
     e.preventDefault();
     if (disabled) return;
-
     if (dragSource === 'available' && dragIndex !== null) {
       const word = available[dragIndex];
       const newAvailable = available.filter((_, i) => i !== dragIndex);
@@ -41,11 +39,9 @@ export default function SentenceConstructionExercise({ exercise, onSubmit, disab
       setSelected(newSelected);
       setAvailable(newAvailable);
     }
-
     resetDrag();
   };
 
-  // --- Drag to reorder within selected ---
   const handleSelectedDragStart = (e: React.DragEvent, index: number) => {
     if (disabled) return;
     e.dataTransfer.effectAllowed = 'move';
@@ -63,27 +59,21 @@ export default function SentenceConstructionExercise({ exercise, onSubmit, disab
   const handleSelectedDrop = (e: React.DragEvent, dropIndex: number) => {
     e.preventDefault();
     if (disabled || dragIndex === null) return;
-
     if (dragSource === 'selected') {
-      // Reorder within selected
       const newSelected = [...selected];
       const [moved] = newSelected.splice(dragIndex, 1);
       newSelected.splice(dropIndex, 0, moved);
       setSelected(newSelected);
     } else if (dragSource === 'available') {
-      // Drop from available into a specific position
       handleDropOnAnswer(e, dropIndex);
       return;
     }
-
     resetDrag();
   };
 
-  // --- Drag from selected back to available ---
   const handleDropOnAvailable = (e: React.DragEvent) => {
     e.preventDefault();
     if (disabled || dragSource !== 'selected' || dragIndex === null) return;
-
     const word = selected[dragIndex];
     setSelected(selected.filter((_, i) => i !== dragIndex));
     setAvailable([...available, word]);
@@ -96,7 +86,6 @@ export default function SentenceConstructionExercise({ exercise, onSubmit, disab
     setDragSource(null);
   };
 
-  // --- Click fallback ---
   const addWord = (word: string, index: number) => {
     if (disabled) return;
     setSelected([...selected, word]);
@@ -110,48 +99,43 @@ export default function SentenceConstructionExercise({ exercise, onSubmit, disab
     setAvailable([...available, word]);
   };
 
-  const handleSubmit = () => {
-    if (selected.length > 0) onSubmit(selected);
-  };
-
-  const handleReset = () => {
-    setSelected([]);
-    setAvailable(answerKey.words_given);
-  };
-
   return (
     <div className="space-y-4">
-      <p className="text-sm text-gray-500 italic mb-2">{exercise.english_text}</p>
+      <p className="text-sm text-[var(--color-text-secondary)] italic mb-2">{exercise.english_text}</p>
 
-      {/* Answer area — drop zone */}
+      {/* Answer area */}
       <div
         ref={dropZoneRef}
+        role="listbox"
+        aria-label="Your sentence"
         onDragOver={(e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; }}
         onDrop={(e) => handleDropOnAnswer(e)}
-        className={`min-h-[3.5rem] p-3 rounded-lg flex flex-wrap gap-2 transition-colors ${
+        className={`min-h-[3.5rem] p-3 rounded-[var(--radius-card)] flex flex-wrap gap-2 transition-colors ${
           dragSource === 'available'
-            ? 'bg-blue-100 border-2 border-blue-400'
-            : 'bg-blue-50 border-2 border-dashed border-blue-300'
+            ? 'bg-[var(--color-accent-primary-15)] border-2 border-[var(--color-accent-primary)]'
+            : 'bg-[var(--color-bg-tertiary)] border-2 border-dashed border-[var(--color-border-primary)]'
         }`}
       >
         {selected.length === 0 && (
-          <span className="text-gray-400 text-sm">Drag words here to build the sentence...</span>
+          <span className="text-[var(--color-text-tertiary)] text-sm">Click or drag words here to build the sentence...</span>
         )}
         {selected.map((word, i) => (
           <div
             key={`sel-${i}`}
+            role="option"
+            aria-selected={true}
             draggable={!disabled}
             onDragStart={(e) => handleSelectedDragStart(e, i)}
             onDragOver={(e) => handleSelectedDragOver(e, i)}
             onDrop={(e) => handleSelectedDrop(e, i)}
             onDragEnd={resetDrag}
             onClick={() => removeWord(i)}
-            className={`select-none cursor-grab active:cursor-grabbing px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+            className={`select-none cursor-grab active:cursor-grabbing px-3 py-1.5 rounded-[var(--radius-button)] text-sm font-medium transition-all ${
               dragSource === 'selected' && dragIndex === i
-                ? 'opacity-40 bg-blue-400 text-white'
+                ? 'opacity-40 bg-[var(--color-accent-primary)] text-white'
                 : dragOverIndex === i && dragSource === 'selected'
-                  ? 'bg-blue-700 text-white scale-105'
-                  : 'bg-blue-600 text-white hover:bg-blue-700'
+                  ? 'bg-[var(--color-accent-primary-hover)] text-white scale-105'
+                  : 'bg-[var(--color-accent-primary)] text-white hover:bg-[var(--color-accent-primary-hover)]'
             } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             {word}
@@ -159,12 +143,12 @@ export default function SentenceConstructionExercise({ exercise, onSubmit, disab
         ))}
       </div>
 
-      {/* Available words — also a drop zone to return words */}
+      {/* Available words */}
       <div
         onDragOver={(e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; }}
         onDrop={handleDropOnAvailable}
-        className={`min-h-[2.5rem] flex flex-wrap gap-2 p-2 rounded-lg transition-colors ${
-          dragSource === 'selected' ? 'bg-gray-100 border-2 border-dashed border-gray-300' : ''
+        className={`min-h-[2.5rem] flex flex-wrap gap-2 p-2 rounded-[var(--radius-card)] transition-colors ${
+          dragSource === 'selected' ? 'bg-[var(--color-bg-tertiary)] border-2 border-dashed border-[var(--color-border-primary)]' : ''
         }`}
       >
         {available.map((word, i) => (
@@ -174,32 +158,32 @@ export default function SentenceConstructionExercise({ exercise, onSubmit, disab
             onDragStart={(e) => handleAvailableDragStart(e, word, i)}
             onDragEnd={resetDrag}
             onClick={() => addWord(word, i)}
-            className={`select-none cursor-grab active:cursor-grabbing px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+            className={`select-none cursor-grab active:cursor-grabbing px-3 py-1.5 rounded-[var(--radius-button)] text-sm font-medium transition-all ${
               dragSource === 'available' && dragIndex === i
-                ? 'opacity-40 bg-gray-300 text-gray-500'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                ? 'opacity-40 bg-[var(--color-border-primary)] text-[var(--color-text-tertiary)]'
+                : 'bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border-primary)]'
             } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             {word}
           </div>
         ))}
         {available.length === 0 && dragSource !== 'selected' && (
-          <span className="text-xs text-gray-300 italic">All words placed</span>
+          <span className="text-xs text-[var(--color-text-tertiary)] italic">All words placed</span>
         )}
       </div>
 
       <div className="flex gap-3">
         <button
-          onClick={handleSubmit}
+          onClick={() => { if (selected.length > 0) onSubmit(selected); }}
           disabled={disabled || selected.length === 0}
-          className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="bg-[var(--color-accent-primary)] text-white px-6 py-2 rounded-[var(--radius-button)] hover:bg-[var(--color-accent-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors btn-hover"
         >
           Check
         </button>
         <button
-          onClick={handleReset}
+          onClick={() => { setSelected([]); setAvailable(answerKey.words_given); }}
           disabled={disabled}
-          className="text-gray-500 px-4 py-2 rounded-lg hover:bg-gray-100 disabled:opacity-50 transition-colors"
+          className="text-[var(--color-text-secondary)] px-4 py-2 rounded-[var(--radius-button)] hover:bg-[var(--color-bg-tertiary)] disabled:opacity-50 transition-colors"
         >
           Reset
         </button>

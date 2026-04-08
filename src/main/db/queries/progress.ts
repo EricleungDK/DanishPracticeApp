@@ -1,5 +1,5 @@
 import type { Database } from 'sql.js';
-import type { UserProgress, Exercise, OverallStats } from '../../../shared/types';
+import type { UserProgress, Exercise, OverallStats, StatsByType, ExerciseType } from '../../../shared/types';
 
 export function getProgress(db: Database, exerciseId: string): UserProgress | undefined {
   const rows = queryAll(db, 'SELECT * FROM user_progress WHERE exercise_id = ?', [exerciseId]);
@@ -115,6 +115,28 @@ export function getStats(db: Database): OverallStats {
     dueCount,
     streak,
   };
+}
+
+export function getStatsByType(db: Database): StatsByType[] {
+  const rows = queryAll(
+    db,
+    `SELECT e.type,
+       COUNT(*) as total,
+       SUM(CASE WHEN p.quality_history IS NOT NULL THEN
+         (SELECT COUNT(*) FROM json_each(p.quality_history) WHERE json_each.value >= 3)
+       ELSE 0 END) as correct
+     FROM user_progress p
+     JOIN exercises e ON e.id = p.exercise_id
+     WHERE p.last_review IS NOT NULL
+     GROUP BY e.type`,
+    [],
+  );
+
+  return rows.map((row: any) => ({
+    type: row.type as ExerciseType,
+    total: row.total || 0,
+    correct: row.correct || 0,
+  }));
 }
 
 export function resetProgress(db: Database): void {

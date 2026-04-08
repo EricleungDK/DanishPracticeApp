@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAppStore } from '../store/useAppStore';
+import ThemeToggle from '../components/ui/ThemeToggle';
 
 export default function Settings() {
   const [showConfirm, setShowConfirm] = useState(false);
@@ -13,32 +14,43 @@ export default function Settings() {
 
   return (
     <div className="w-full max-w-2xl mx-auto">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">Settings</h2>
+      <h2 className="text-2xl font-bold text-[var(--color-text-primary)] mb-6">Settings</h2>
 
-      <div className="bg-white rounded-xl shadow-sm border p-6 space-y-6">
+      <div
+        className="bg-[var(--color-bg-secondary)] rounded-[var(--radius-card)] border border-[var(--color-border-primary)] p-6 space-y-6"
+        style={{ boxShadow: 'var(--shadow-card)' }}
+      >
         <div>
-          <h3 className="font-semibold text-gray-800">Reset Progress</h3>
-          <p className="text-sm text-gray-500 mt-1">
+          <h3 className="font-semibold text-[var(--color-text-primary)]">Appearance</h3>
+          <p className="text-sm text-[var(--color-text-secondary)] mt-1 mb-3">
+            Toggle between light and dark mode.
+          </p>
+          <ThemeToggle />
+        </div>
+
+        <div className="pt-4 border-t border-[var(--color-border-secondary)]">
+          <h3 className="font-semibold text-[var(--color-text-primary)]">Reset Progress</h3>
+          <p className="text-sm text-[var(--color-text-secondary)] mt-1">
             Clear all review history and spaced repetition data. Exercise content will be kept.
           </p>
           {!showConfirm ? (
             <button
               onClick={() => setShowConfirm(true)}
-              className="mt-3 bg-red-100 text-red-700 px-4 py-2 rounded-lg hover:bg-red-200 transition-colors"
+              className="mt-3 bg-[var(--color-error-bg)] text-[var(--color-error)] px-4 py-2 rounded-[var(--radius-button)] hover:opacity-80 transition-opacity btn-hover"
             >
               Reset All Progress
             </button>
           ) : (
-            <div className="mt-3 flex gap-3">
+            <div className="mt-3 flex gap-3" role="alertdialog" aria-label="Confirm reset">
               <button
                 onClick={handleReset}
-                className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+                className="bg-[var(--color-error)] text-white px-4 py-2 rounded-[var(--radius-button)] hover:opacity-90 transition-opacity btn-hover"
               >
                 Confirm Reset
               </button>
               <button
                 onClick={() => setShowConfirm(false)}
-                className="bg-gray-100 text-gray-600 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
+                className="bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] px-4 py-2 rounded-[var(--radius-button)] hover:opacity-80 transition-opacity btn-hover"
               >
                 Cancel
               </button>
@@ -46,12 +58,12 @@ export default function Settings() {
           )}
         </div>
 
-        <div className="pt-4 border-t">
-          <h3 className="font-semibold text-gray-800">About</h3>
-          <p className="text-sm text-gray-500 mt-1">
+        <div className="pt-4 border-t border-[var(--color-border-secondary)]">
+          <h3 className="font-semibold text-[var(--color-text-primary)]">About</h3>
+          <p className="text-sm text-[var(--color-text-secondary)] mt-1">
             Danish Practice Generator v1.0.0
           </p>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-[var(--color-text-tertiary)]">
             Built with Electron + React + TypeScript
           </p>
         </div>
