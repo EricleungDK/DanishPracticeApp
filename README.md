@@ -85,7 +85,3 @@ src/
   shared/       Types and constants shared across processes
   preload/      Context bridge (secure API exposure)
 ```
-
-## License
-
-MIT
