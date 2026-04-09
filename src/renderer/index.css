@@ -102,6 +102,16 @@ html, body, #root {
   background-color: var(--color-bg-primary);
 }
 
+/* Fullscreen backdrop — guarantees theme color covers iOS WKWebView safe-area zones */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-color: var(--color-bg-primary);
+  z-index: -10;
+  pointer-events: none;
+}
+
 body {
   font-family: var(--font-sans);
   color: var(--color-text-primary);
