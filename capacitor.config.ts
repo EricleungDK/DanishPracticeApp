@@ -1,12 +1,12 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 // NOTE on appId:
-// - iOS bundle ID (Apple): 'com.ai-ya-work.DanishPractice' (hyphens OK for Apple)
-// - Android applicationId: 'com.danishpractice.app' (hyphens NOT allowed in Java package names,
-//   so Android keeps its original ID — see android/app/build.gradle)
+// - iOS bundle ID (Apple):   'com.DanishPracticeApp'
+// - Android applicationId:   'com.danishpractice.app' (see android/app/build.gradle)
 // The value below is the iOS ID, used when scaffolding `npx cap add ios`.
+// Android is not re-scaffolded and keeps its original ID.
 const config: CapacitorConfig = {
-  appId: 'com.ai-ya-work.DanishPractice',
+  appId: 'com.DanishPracticeApp',
   appName: 'Dansk Praksis',
   webDir: 'dist-web',
   plugins: {
