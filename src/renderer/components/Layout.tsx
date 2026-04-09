@@ -8,7 +8,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <div
-      className="flex flex-col-reverse md:flex-row h-screen bg-[var(--color-bg-primary)]"
+      className="flex flex-col-reverse md:flex-row h-dvh bg-[var(--color-bg-primary)]"
       style={{
         paddingTop: 'max(var(--safe-area-top, 0px), env(safe-area-inset-top))',
         paddingBottom: 'max(var(--safe-area-bottom, 0px), env(safe-area-inset-bottom))',
