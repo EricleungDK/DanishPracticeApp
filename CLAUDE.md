@@ -20,6 +20,7 @@ All architecture, schema, SOPs, and task tracking live in `.agent/`. Start there
 - Update `.agent/` docs after implementing features
 - Keep commits concise
 - Sub-agents are **researchers/planners only** — parent agent implements
+- whenever we make a change on the existing feature or building new feature, help me build a new version of desktop app .exe file
 
 ---
 
