@@ -8,10 +8,14 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <div
-      className="flex flex-col-reverse md:flex-row h-dvh bg-[var(--color-bg-primary)]"
+      className="flex flex-col-reverse md:flex-row bg-[var(--color-bg-primary)]"
       style={{
-        paddingTop: 'max(var(--safe-area-top, 0px), env(safe-area-inset-top))',
-        paddingBottom: 'max(var(--safe-area-bottom, 0px), env(safe-area-inset-bottom))',
+        height: '100dvh',
+        paddingTop: 'env(safe-area-inset-top, 0px)',
+        paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+        paddingLeft: 'env(safe-area-inset-left, 0px)',
+        paddingRight: 'env(safe-area-inset-right, 0px)',
+        boxSizing: 'border-box',
       }}
     >
       <a href="#main-content" className="skip-link">

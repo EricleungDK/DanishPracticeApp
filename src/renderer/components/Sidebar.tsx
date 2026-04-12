@@ -45,12 +45,15 @@ export default function Sidebar() {
     <nav
       aria-label="Main navigation"
       className="
-        flex flex-row justify-around w-full h-16
+        flex flex-row justify-around w-full
         md:flex-col md:justify-between md:w-56 md:h-auto
         bg-[var(--color-bg-sidebar)] text-[var(--color-text-sidebar)]
         border-r-0 md:border-r border-t md:border-t-0
       "
-      style={{ borderColor: 'var(--color-sidebar-border)' }}
+      style={{
+        borderColor: 'var(--color-sidebar-border)',
+        minHeight: '4rem',
+      }}
     >
       {/* Header — desktop only */}
       <div

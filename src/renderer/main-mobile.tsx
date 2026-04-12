@@ -10,8 +10,6 @@ import './index.css';
 const api = createCapacitorApi();
 setApiInstance(api);
 
-initSafeArea();
-
 const root = createRoot(document.getElementById('root')!);
 root.render(
   <React.StrictMode>
@@ -20,3 +18,8 @@ root.render(
     </ApiProvider>
   </React.StrictMode>,
 );
+
+// Defer safe-area init to next frame so WKWebView layout is complete
+requestAnimationFrame(() => {
+  initSafeArea();
+});

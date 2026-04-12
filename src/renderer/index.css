@@ -95,10 +95,16 @@
 }
 
 /* ── Base ── */
-html, body, #root {
+html, body {
   height: 100%;
   margin: 0;
   overflow: hidden;
+  background-color: var(--color-bg-primary);
+}
+
+#root {
+  height: 100%;
+  margin: 0;
   background-color: var(--color-bg-primary);
 }
 
