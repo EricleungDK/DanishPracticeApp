@@ -25,5 +25,5 @@ export function getSessionHistory(db: Database, limit: number = 20): SessionHist
     results.push(stmt.getAsObject() as any);
   }
   stmt.free();
-  return results;
+  return results.reverse();
 }
