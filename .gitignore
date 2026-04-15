@@ -13,3 +13,6 @@ yarn-debug.log*
 yarn-error.log*
 android/dist-web/
 android/
+.agent/
+.claude/
+CLAUDE.md
