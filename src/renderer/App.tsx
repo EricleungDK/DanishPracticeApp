@@ -12,9 +12,11 @@ export default function App() {
   const currentPage = useAppStore((s) => s.currentPage);
   const loadDashboardData = useAppStore((s) => s.loadDashboardData);
   const loadTheme = useAppStore((s) => s.loadTheme);
+  const loadPausedSession = useAppStore((s) => s.loadPausedSession);
 
   useEffect(() => {
     loadTheme();
+    loadPausedSession();
     loadDashboardData();
   }, []);
 

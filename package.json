@@ -1,7 +1,7 @@
 {
   "name": "danish-practice-generator",
   "productName": "Danish Practice Generator",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Desktop app for practicing Danish at B1-B2 level with spaced repetition",
   "main": ".vite/build/index.js",
   "private": true,

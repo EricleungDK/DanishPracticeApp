@@ -15,20 +15,24 @@ export default function Sidebar() {
   const currentPage = useAppStore((s) => s.currentPage);
   const navigate = useAppStore((s) => s.navigate);
   const stats = useAppStore((s) => s.stats);
+  const sessionType = useAppStore((s) => s.sessionType);
   const sessionExercises = useAppStore((s) => s.sessionExercises);
   const sessionComplete = useAppStore((s) => s.sessionComplete);
+  const pausedSession = useAppStore((s) => s.pausedSession);
   const startPractice = useAppStore((s) => s.startPractice);
   const startReview = useAppStore((s) => s.startReview);
 
+  const hasLiveSession = sessionExercises.length > 0 && !sessionComplete;
+
   const handleNav = (page: Page) => {
     if (page === 'exercise') {
-      if (sessionExercises.length > 0 && !sessionComplete) {
+      if (hasLiveSession && sessionType === 'exercise') {
         navigate('exercise');
       } else {
         startPractice();
       }
     } else if (page === 'review') {
-      if (sessionExercises.length > 0 && !sessionComplete && currentPage === 'review') {
+      if (hasLiveSession && sessionType === 'review') {
         navigate('review');
       } else {
         startReview();
@@ -37,9 +41,6 @@ export default function Sidebar() {
       navigate(page);
     }
   };
-
-  const hasActiveSession =
-    sessionExercises.length > 0 && !sessionComplete && (currentPage === 'exercise' || currentPage === 'review');
 
   return (
     <nav
@@ -103,13 +104,40 @@ export default function Sidebar() {
             >
               <span style={{ color: isActive ? accent : undefined }}>{icon}</span>
               <span className="hidden md:inline flex-1 text-left">{label}</span>
-              {page === 'exercise' && hasActiveSession && currentPage === 'exercise' && (
+              {page === 'exercise' && hasLiveSession && sessionType === 'exercise' && (
                 <span
-                  aria-label="Session active"
+                  aria-label="Practice session active"
                   className="ml-auto hidden md:inline text-xs px-2 py-0.5 rounded-full"
                   style={{ backgroundColor: '#5B7F6A', color: 'white' }}
                 >
                   live
+                </span>
+              )}
+              {page === 'exercise' && !hasLiveSession && pausedSession?.sessionType === 'exercise' && (
+                <span
+                  aria-label="Paused practice session"
+                  className="ml-auto hidden md:inline text-xs px-2 py-0.5 rounded-full"
+                  style={{ backgroundColor: '#C17D56', color: 'white' }}
+                >
+                  paused
+                </span>
+              )}
+              {page === 'review' && hasLiveSession && sessionType === 'review' && (
+                <span
+                  aria-label="Review session active"
+                  className="ml-auto hidden md:inline text-xs px-2 py-0.5 rounded-full"
+                  style={{ backgroundColor: '#5B7F6A', color: 'white' }}
+                >
+                  live
+                </span>
+              )}
+              {page === 'review' && !hasLiveSession && pausedSession?.sessionType === 'review' && (
+                <span
+                  aria-label="Paused review session"
+                  className="ml-auto hidden md:inline text-xs px-2 py-0.5 rounded-full"
+                  style={{ backgroundColor: '#C17D56', color: 'white' }}
+                >
+                  paused
                 </span>
               )}
               {page === 'review' && stats.dueCount > 0 && (

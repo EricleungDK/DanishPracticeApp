@@ -3,7 +3,7 @@ import { getMigrations } from './migrations'
 import type { AppAPI } from '../../../src/shared/types/api'
 import type {
   Exercise, ExerciseFilters, WordEntry, WordlistFilters,
-  UserProgress, SessionHistory, OverallStats, StatsByType,
+  UserProgress, SessionHistory, OverallStats,
   SynonymEntry, SynonymFilters, ExerciseType,
 } from '../../../src/shared/types'
 
@@ -261,23 +261,6 @@ export function createCapacitorApi(): AppAPI {
         dueCount,
         streak,
       }
-    },
-
-    async getStatsByType(): Promise<StatsByType[]> {
-      const conn = await getDb()
-      const res = await conn.query(
-        `SELECT e.type, COUNT(*) as total,
-           SUM(CASE WHEN p.quality_history IS NOT NULL THEN
-             (SELECT COUNT(*) FROM json_each(p.quality_history) WHERE json_each.value >= 3)
-           ELSE 0 END) as correct
-         FROM user_progress p JOIN exercises e ON e.id = p.exercise_id
-         WHERE p.last_review IS NOT NULL GROUP BY e.type`,
-      )
-      return (res.values ?? []).map((row: any) => ({
-        type: row.type as ExerciseType,
-        total: row.total || 0,
-        correct: row.correct || 0,
-      }))
     },
 
     async getSynonyms(filters?: SynonymFilters): Promise<SynonymEntry[]> {

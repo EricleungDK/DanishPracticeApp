@@ -8,7 +8,6 @@ import {
   upsertProgress,
   getDueExercises,
   getStats,
-  getStatsByType,
   resetProgress,
 } from '../db/queries/progress';
 import { saveSession, getSessionHistory } from '../db/queries/sessions';
@@ -105,14 +104,6 @@ export function registerIpcHandlers(): void {
   ipcMain.handle(IPC_CHANNELS.GET_STATS, () => {
     try {
       return getStats(getDb());
-    } catch (e: any) {
-      return { error: e.message };
-    }
-  });
-
-  ipcMain.handle(IPC_CHANNELS.GET_STATS_BY_TYPE, () => {
-    try {
-      return getStatsByType(getDb());
     } catch (e: any) {
       return { error: e.message };
     }

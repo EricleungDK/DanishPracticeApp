@@ -6,7 +6,6 @@ import type {
   UserProgress,
   SessionHistory,
   OverallStats,
-  StatsByType,
   SynonymEntry,
   SynonymFilters,
 } from './index';
@@ -23,7 +22,6 @@ export interface AppAPI {
   saveSetting(key: string, value: string): Promise<{ success: boolean }>;
   getSetting(key: string): Promise<string | undefined>;
   getStats(): Promise<OverallStats>;
-  getStatsByType(): Promise<StatsByType[]>;
   getSynonyms(filters?: SynonymFilters): Promise<SynonymEntry[]>;
   resetProgress(): Promise<{ success: boolean }>;
 }

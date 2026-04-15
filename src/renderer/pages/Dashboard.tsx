@@ -3,7 +3,6 @@ import { PenLine, Puzzle, BookOpen, Volume2 } from 'lucide-react';
 import { useAppStore } from '../store/useAppStore';
 import StatsCard from '../components/StatsCard';
 import StreakCalendar from '../components/charts/StreakCalendar';
-import SkillRadar from '../components/charts/SkillRadar';
 import SessionHistoryChart from '../components/charts/SessionHistoryChart';
 import type { ExerciseType } from '../../shared/types';
 
@@ -107,29 +106,12 @@ export default function Dashboard() {
           <StreakCalendar dailyActivity={chartData.dailyActivity} />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div
-            className="bg-[var(--color-bg-secondary)] border border-[var(--color-border-primary)] rounded-[var(--radius-card)] p-5"
-            style={{ boxShadow: 'var(--shadow-card)' }}
-          >
-            <p className="text-sm font-medium text-[var(--color-text-secondary)] mb-3">Score History</p>
-            <SessionHistoryChart sessions={chartData.sessionHistory} />
-          </div>
-          <div
-            className="bg-[var(--color-bg-secondary)] border border-[var(--color-border-primary)] rounded-[var(--radius-card)] p-5"
-            style={{ boxShadow: 'var(--shadow-card)' }}
-          >
-            <p className="text-sm font-medium text-[var(--color-text-secondary)] mb-3">Skill Breakdown</p>
-            <SkillRadar
-              data={chartData.statsByType.map(s => ({
-                type: s.type,
-                label: s.type === 'fill_blank' ? 'Fill Blank'
-                  : s.type === 'sentence_construction' ? 'Sentence'
-                  : s.type === 'reading' ? 'Reading' : 'Listening',
-                accuracy: s.total > 0 ? Math.round((s.correct / s.total) * 100) : 0,
-              }))}
-            />
-          </div>
+        <div
+          className="bg-[var(--color-bg-secondary)] border border-[var(--color-border-primary)] rounded-[var(--radius-card)] p-5"
+          style={{ boxShadow: 'var(--shadow-card)' }}
+        >
+          <p className="text-sm font-medium text-[var(--color-text-secondary)] mb-3">Score History</p>
+          <SessionHistoryChart sessions={chartData.sessionHistory} />
         </div>
       </div>
     </div>

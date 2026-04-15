@@ -111,12 +111,6 @@ export interface OverallStats {
   dueCount: number;
 }
 
-export interface StatsByType {
-  type: ExerciseType;
-  total: number;
-  correct: number;
-}
-
 export interface ExerciseFilters {
   type?: ExerciseType;
   difficulty?: Difficulty;

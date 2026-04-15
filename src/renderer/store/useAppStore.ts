@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { Exercise, ExerciseAnswer, ExerciseType, Difficulty, OverallStats, UserProgress, ReadingQuestion, StatsByType, SessionHistory } from '../../shared/types';
+import type { Exercise, ExerciseAnswer, ExerciseType, Difficulty, OverallStats, UserProgress, ReadingQuestion, SessionHistory } from '../../shared/types';
 import { sm2 } from '../../shared/sm2';
 import { DEFAULT_EASE_FACTOR } from '../../shared/constants';
 import { checkAnswer } from '../../content/generators/answer-checker';
@@ -16,6 +16,19 @@ interface SessionStats {
   startedAt: string;
 }
 
+export type SessionMode = 'exercise' | 'review';
+
+interface SessionSnapshot {
+  sessionType: SessionMode;
+  sessionExercises: Exercise[];
+  currentIndex: number;
+  sessionStats: SessionStats;
+  lastResult: { correct: boolean; expected: string; explanation: string } | null;
+  awaitingRating: boolean;
+}
+
+const PAUSED_SESSION_KEY = 'paused_session';
+
 interface AppState {
   // Theme
   theme: Theme;
@@ -30,13 +43,13 @@ interface AppState {
   stats: OverallStats;
   chartData: {
     sessionHistory: { date: string; score: number }[];
-    statsByType: StatsByType[];
     dailyActivity: Record<string, number>;
   };
   loadDashboardData: () => Promise<void>;
   loadChartData: () => Promise<void>;
 
   // Exercise session
+  sessionType: SessionMode | null;
   sessionExercises: Exercise[];
   currentIndex: number;
   sessionStats: SessionStats;
@@ -44,12 +57,18 @@ interface AppState {
   awaitingRating: boolean;
   sessionComplete: boolean;
 
+  // Paused session (persisted across app restarts)
+  pausedSession: SessionSnapshot | null;
+
   startPractice: (type?: ExerciseType, difficulty?: Difficulty) => Promise<void>;
   startReview: () => Promise<void>;
   submitAnswer: (rawAnswer: string | string[] | { questionIndex: number; answer: string | number; question: ReadingQuestion }) => void;
   rateAndNext: (quality: number) => Promise<void>;
   endSession: () => Promise<void>;
   resetSession: () => void;
+  pauseSession: () => Promise<void>;
+  resumePausedSession: () => void;
+  loadPausedSession: () => Promise<void>;
 }
 
 export const useAppStore = create<AppState>((set, get) => ({
@@ -76,7 +95,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   },
 
   stats: { totalReviewed: 0, accuracy: 0, streak: 0, dueCount: 0 },
-  chartData: { sessionHistory: [], statsByType: [], dailyActivity: {} },
+  chartData: { sessionHistory: [], dailyActivity: {} },
 
   loadDashboardData: async () => {
     try {
@@ -90,10 +109,7 @@ export const useAppStore = create<AppState>((set, get) => ({
 
   loadChartData: async () => {
     try {
-      const [sessions, statsByType] = await Promise.all([
-        getApiInstance().getSessionHistory(20),
-        getApiInstance().getStatsByType(),
-      ]);
+      const sessions = await getApiInstance().getSessionHistory(20);
 
       const sessionHistory = sessions.map((s: SessionHistory) => ({
         date: s.started_at.split('T')[0],
@@ -107,25 +123,33 @@ export const useAppStore = create<AppState>((set, get) => ({
       }
 
       set({
-        chartData: { sessionHistory, statsByType, dailyActivity },
+        chartData: { sessionHistory, dailyActivity },
       });
     } catch (e) {
       console.error('Failed to load chart data:', e);
     }
   },
 
+  sessionType: null,
   sessionExercises: [],
   currentIndex: 0,
   sessionStats: { completed: 0, correct: 0, startedAt: '' },
   lastResult: null,
   awaitingRating: false,
   sessionComplete: false,
+  pausedSession: null,
 
   startPractice: async (type, difficulty) => {
+    const { pausedSession } = get();
+    if (pausedSession?.sessionType === 'exercise' && !type && !difficulty) {
+      get().resumePausedSession();
+      return;
+    }
     try {
       const all = await getApiInstance().getExercises({ type, difficulty });
       const shuffled = shuffleArray(all).slice(0, 10);
       set({
+        sessionType: 'exercise',
         sessionExercises: shuffled,
         currentIndex: 0,
         sessionStats: { completed: 0, correct: 0, startedAt: new Date().toISOString() },
@@ -140,10 +164,16 @@ export const useAppStore = create<AppState>((set, get) => ({
   },
 
   startReview: async () => {
+    const { pausedSession } = get();
+    if (pausedSession?.sessionType === 'review') {
+      get().resumePausedSession();
+      return;
+    }
     try {
       const due = await getApiInstance().getDueExercises();
       const exercises = due.slice(0, 10);
       set({
+        sessionType: 'review',
         sessionExercises: exercises,
         currentIndex: 0,
         sessionStats: { completed: 0, correct: 0, startedAt: new Date().toISOString() },
@@ -243,7 +273,9 @@ export const useAppStore = create<AppState>((set, get) => ({
             : 0,
       };
       await getApiInstance().saveSession(session);
-      set({ currentPage: 'dashboard' });
+      await getApiInstance().saveSetting(PAUSED_SESSION_KEY, '');
+      set({ currentPage: 'dashboard', pausedSession: null });
+      get().resetSession();
       get().loadDashboardData();
     } catch (e) {
       console.error('Failed to end session:', e);
@@ -252,6 +284,7 @@ export const useAppStore = create<AppState>((set, get) => ({
 
   resetSession: () => {
     set({
+      sessionType: null,
       sessionExercises: [],
       currentIndex: 0,
       sessionStats: { completed: 0, correct: 0, startedAt: '' },
@@ -259,5 +292,57 @@ export const useAppStore = create<AppState>((set, get) => ({
       awaitingRating: false,
       sessionComplete: false,
     });
+  },
+
+  pauseSession: async () => {
+    const { sessionType, sessionExercises, currentIndex, sessionStats, lastResult, awaitingRating } = get();
+    if (!sessionType || sessionExercises.length === 0) return;
+    const snapshot: SessionSnapshot = {
+      sessionType,
+      sessionExercises,
+      currentIndex,
+      sessionStats,
+      lastResult,
+      awaitingRating,
+    };
+    try {
+      await getApiInstance().saveSetting(PAUSED_SESSION_KEY, JSON.stringify(snapshot));
+    } catch (e) {
+      console.error('Failed to persist paused session:', e);
+    }
+    set({ pausedSession: snapshot, currentPage: 'dashboard' });
+    get().resetSession();
+    get().loadDashboardData();
+  },
+
+  resumePausedSession: () => {
+    const { pausedSession } = get();
+    if (!pausedSession) return;
+    set({
+      sessionType: pausedSession.sessionType,
+      sessionExercises: pausedSession.sessionExercises,
+      currentIndex: pausedSession.currentIndex,
+      sessionStats: pausedSession.sessionStats,
+      lastResult: pausedSession.lastResult,
+      awaitingRating: pausedSession.awaitingRating,
+      sessionComplete: false,
+      pausedSession: null,
+      currentPage: pausedSession.sessionType,
+    });
+    getApiInstance().saveSetting(PAUSED_SESSION_KEY, '').catch(() => { /* best effort */ });
+  },
+
+  loadPausedSession: async () => {
+    try {
+      const raw = await getApiInstance().getSetting(PAUSED_SESSION_KEY);
+      if (raw && raw.length > 2) {
+        const snapshot = JSON.parse(raw) as SessionSnapshot;
+        if (snapshot && snapshot.sessionType && Array.isArray(snapshot.sessionExercises)) {
+          set({ pausedSession: snapshot });
+        }
+      }
+    } catch (e) {
+      console.error('Failed to load paused session:', e);
+    }
   },
 }));

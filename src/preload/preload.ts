@@ -8,7 +8,6 @@ import type {
   UserProgress,
   SessionHistory,
   OverallStats,
-  StatsByType,
   SynonymEntry,
   SynonymFilters,
 } from '../shared/types';
@@ -46,9 +45,6 @@ const api = {
 
   getStats: (): Promise<OverallStats> =>
     ipcRenderer.invoke(IPC_CHANNELS.GET_STATS),
-
-  getStatsByType: (): Promise<StatsByType[]> =>
-    ipcRenderer.invoke(IPC_CHANNELS.GET_STATS_BY_TYPE),
 
   getSynonyms: (filters?: SynonymFilters): Promise<SynonymEntry[]> =>
     ipcRenderer.invoke(IPC_CHANNELS.GET_SYNONYMS, filters),

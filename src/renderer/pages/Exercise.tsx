@@ -1,4 +1,5 @@
 import React from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { useAppStore } from '../store/useAppStore';
 import ExerciseCard from '../components/ExerciseCard';
 import FillBlankExercise from '../components/exercises/FillBlankExercise';
@@ -19,6 +20,7 @@ export default function Exercise() {
     rateAndNext,
     endSession,
     navigate,
+    pauseSession,
   } = useAppStore();
 
   if (sessionExercises.length === 0) {
@@ -83,16 +85,28 @@ export default function Exercise() {
   };
 
   return (
-    <ExerciseCard exercise={exercise} index={currentIndex} total={sessionExercises.length}>
-      {renderExercise()}
-      {lastResult && awaitingRating && (
-        <ResultDisplay
-          correct={lastResult.correct}
-          expected={lastResult.expected}
-          explanation={lastResult.explanation}
-          onRate={rateAndNext}
-        />
-      )}
-    </ExerciseCard>
+    <div className="w-full max-w-3xl mx-auto">
+      <div className="flex items-center mb-3">
+        <button
+          onClick={pauseSession}
+          className="flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
+          aria-label="Pause session and return to dashboard"
+        >
+          <ArrowLeft size={16} />
+          <span>Pause & go back</span>
+        </button>
+      </div>
+      <ExerciseCard exercise={exercise} index={currentIndex} total={sessionExercises.length}>
+        {renderExercise()}
+        {lastResult && awaitingRating && (
+          <ResultDisplay
+            correct={lastResult.correct}
+            expected={lastResult.expected}
+            explanation={lastResult.explanation}
+            onRate={rateAndNext}
+          />
+        )}
+      </ExerciseCard>
+    </div>
   );
 }
